@@ -1,0 +1,171 @@
+*{
+ /* font-family: 'Georgia', cursive;*/
+  font-family: 'Arial';
+}
+
+
+
+
+/**** INDEX.PHP ***/
+
+body{
+    background-image: url("../imagenes/fondo6.jpg");
+}
+
+#usuario, #clave{
+	text-transform:uppercase; 
+	border-color: #2874A6; 
+	border-radius: 25px; 
+	text-align: center; 
+	margin: 5px;
+    font-size: 15px;
+}
+
+#titulo{
+	color: #003366;
+    text-align: center; /*alineacion*/
+    font-size: 30px;  /*tamaño letra*/
+    font-weight: 500; /*grosor letra*/
+    margin: 1px;
+}
+
+#botonIngresar{
+    height: 40px; 
+    width: 150px; 
+    border: 2px solid;
+    border-radius: 25px;
+    font-size: 15px;
+    background-color: #148F77;
+    color: white;
+    margin:1px
+ }
+
+#botonIngresar:hover {
+  background: white;
+  color: #148F77 !important;
+}
+
+#imagen{
+   height: 250px;
+   width: 200px;
+}
+
+
+
+
+/**** NAVEGACIONEXP.PHP ****/
+#barra{
+	/*background: #0072BC;*/
+	/*background: #003366;*/
+}
+#salir{
+  text-decoration:none;
+  color: white;
+  font-size: 18px;
+  font-family: Georgia;
+}
+
+
+
+/*** MENU-PRINCIPAL.PHP ***/
+#img-menu{
+  border-radius: 10%;
+}
+
+#img-menu:hover{
+  -webkit-transform:scale(1.1);transform:scale(1.1); /*Acercamiento*/
+}
+
+
+
+
+/**** EXPEDIENTES/INDEX.PHP ***/
+#botonMenu{
+  float:right;
+  margin-right: 5px;
+  background-color: #148F77;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+}
+#botonMenu:hover{
+   color: #148F77;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+#usuarioGeneral{
+  font-family: 'Georgia' cursive; 
+  font-size: 15px; 
+  color: #3A73A8; 
+  text-align: right; 
+  margin-right: 20px;
+}
+
+.boton{
+  border: 2px solid;
+  border-color: #0072BC;
+  transition: all 1s ease;
+  /*position: relative;*/
+  position: relative;
+  padding: 25px 1px; /*arriba-abajo, izq-der*/
+  margin: 0px 20px 10px 0px;
+  float: left;
+  border-radius: 15px; /*redondeo de las esquinas*/
+  /*font-family: 'Georgia', cursive;*/
+  font-family: 'Georgia', cursive;
+  font-size: 16px; /*tamaño letra*/
+  color: white; /*color letra*/
+  /*text-decoration: none;  */
+  width: 180px !important; /*tamaño botones*/
+  height: 110px !important;
+  text-align: center; /*alineacion de texto*/
+  background: #0072BC;
+  /*background: #003366;*/
+  /*background: #2874A6;*/
+}
+.boton:hover {
+  background: white;
+  color: #0072BC !important;
+  /*filter: blur(5px);*/
+  -webkit-transform:scale(1.0);transform:scale(1.0); /*Acercamiento*/
+  /*transform: rotateY(180deg);*/
+  /*transform: rotateY(360deg) scale(1.1);*/
+}
+
+
+
+/** EXPEDIENTES/GENERAR-EXPEDIENTE.PHP **/
+
+#botonVolver{
+  float:right;
+  margin-right: 8px;
+  background-color: red;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+}
+
+#botonVolver:hover{
+   color: red;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+
+#botonGenerar{
+  background-color: #148F77;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  width: 115px;
+  margin-right: 7px;
+}
+#botonGenerar:hover{
+   color: #148F77;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+
+

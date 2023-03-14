@@ -1,0 +1,70 @@
+body{
+    /*background-image: url("../imagenes/fondo5.jpg");*/
+}
+
+#titulo{
+  font-family: 'Georgia', cursive;
+  font-size: 28px;
+}
+
+h6{
+  font-family: 'italic'; 
+  color: #3A73A8;
+  font-weight: normal;
+}
+
+#detalle{
+    color: black;
+}
+
+#subtitulo{
+    font-family: 'Verdana', cursive; 
+    color:#003366;
+    font-size:21px;
+}
+
+.contenedor{
+  margin-right: 30px;
+  margin-left: 50px;
+}
+
+#usuario{
+font-family: 'Georgia' cursive; 
+font-size: 18px; 
+color: #3A73A8; 
+text-align: right; 
+margin-right: 20px;
+}
+
+#botonaccion{
+  margin-right: 5px;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  float: left;
+  border-color:#3A73A8;
+  margin: 5px;
+  background-color:#3A73A8;
+  font-family: 'Georgia';
+}
+
+#botonaccion:hover{
+  color:#3A73A8;
+  background-color: white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+#detalleUser{
+  /*font-family: 'Verdana';*/
+  font-family: 'Georgia' cursive; 
+  color:black;
+  font-size: 13px;
+}
+
+#filaUser{
+  background-color: #3A73A8; 
+  color: white; 
+  font-weight: 200;
+  font-family: 'Georgia', cursive;
+  font-size: 17px;
+}

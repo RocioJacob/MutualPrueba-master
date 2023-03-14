@@ -1,0 +1,203 @@
+
+/**** INDEX.PHP ***/
+
+body{
+    background-image: url("../imagenes/fondo6.jpg");
+}
+
+#barraNavegacion{
+  background-color: #1C5D88;
+}
+
+#mycontainer { max-width: 1300px !important; }
+
+.subtituloMenu{
+  font-size: 25px;
+  color: black;|
+  font-family: 'Georgia', cursive;
+  text-align: left;
+  font-weight: 400;
+}
+
+#usuario, #clave{
+	text-transform:uppercase; 
+	border-color: #2874A6; 
+	border-radius: 25px; 
+	text-align: center; 
+	margin: 5px;
+  font-size: 15px;
+}
+
+#tituloPrincipal{
+  font-family: Georgia;
+	color: #003366;
+  text-align: center; /*alineacion*/
+  font-size: 27px;  /*tamaño letra*/
+  font-weight: 500; /*grosor letra*/
+  margin: 1px;
+}
+
+#botonIngresar{
+    height: 40px; 
+    width: 150px; 
+    border: 2px solid;
+    border-radius: 25px;
+    font-size: 15px;
+    background-color: #148F77;
+    color: white;
+    margin:1px;
+ }
+
+#botonIngresar:hover {
+  background: white;
+  color: #148F77 !important;
+}
+
+#imagen{
+   height: 275px;
+   width: 225px;
+}
+
+
+
+/**EXPEDIENTES/index.php**/
+.boton{
+  border: 2px solid;
+  border-color: #3F92C9;
+  transition: all 1s ease;
+  /*position: relative;*/
+  position: relative;
+  padding: 25px 1px; /*arriba-abajo, izq-der*/
+  margin: 0px 20px 10px 0px;
+  float: left;
+  border-radius: 15px; /*redondeo de las esquinas*/
+  /*font-family: 'Georgia', cursive;*/
+  font-family: 'Georgia', cursive;
+  font-size: 16px; /*tamaño letra*/
+  color: white; /*color letra*/
+  /*text-decoration: none;  */
+  width: 180px !important; /*tamaño botones*/
+  height: 110px !important;
+  text-align: center; /*alineacion de texto*/
+  background: #3F92C9;
+}
+
+.boton:hover {
+  background: white;
+  color: #3F92C9 !important;
+  /*filter: blur(5px);*/
+  -webkit-transform:scale(1.0);transform:scale(1.0); /*Acercamiento*/
+  /*transform: rotateY(180deg);*/
+  /*transform: rotateY(360deg) scale(1.1);*/
+}
+
+
+
+
+/**EXPEDIENTES/generar-expediente.php**/
+#tituloFormulario{
+  color:#0072BC;
+}
+
+#botonGenerar{
+  background-color: #148F77;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  width: 100px;
+  margin-right: 7px;
+}
+#botonGenerar:hover{
+   color: #148F77;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+#extracto, #datos, #tipo, #tramite, #delegacion1, #area, #prioridad, #autorizacion1, #autorizacion2{
+  border-color: #0072BC;
+}
+
+.botonBandeja{
+  border: 2px solid;
+  border-color: #0072BC;
+  transition: all 1s ease;
+  /*position: relative;*/
+  position: relative;
+  padding: 25px 1px; /*arriba-abajo, izq-der*/
+  margin: 0px 20px 10px 0px;
+  float: left;
+  border-radius: 15px; /*redondeo de las esquinas*/
+  /*font-family: 'Georgia', cursive;*/
+  font-family: 'Arial';
+  font-size: 15px; /*tamaño letra*/
+  color: white; /*color letra*/
+  /*text-decoration: none;  */
+  width: 170px !important; /*tamaño botones*/
+  height: 80px !important;
+  text-align: center; /*alineacion de texto*/
+  background: #0072BC;
+}
+
+.tituloBandeja{
+  font-size: 18px;
+  font-family: Arial;
+}
+
+#filaBandeja{
+  background-color: #3A73A8; 
+  color: white; 
+  font-weight: 200;
+  font-family: 'Georgia', cursive;
+  font-size: 16px;
+  text-align:center;
+}
+
+#detalleBandeja{
+  text-align: center;
+  font-size: 12px;
+  border-color: #3A73A8;
+}
+
+#detalleBandeja2{
+  font-size: 12px;
+  border-color: #3A73A8;
+}
+#detalleP{
+  text-align: center;
+  font-size: 13px;
+  color: white;
+  background-color: #E5340E;
+}
+
+
+#botonAccionR{
+  float:center;
+  margin-right: 2px;
+  background-color: white;
+  color: #3A73A8;
+  border: 2px solid;
+  border-radius: 10px;
+  border-color: #3A73A8;
+  font-size: 13px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+#botonAccionR:hover{
+   color: white;
+   background-color:#3A73A8;
+  /*-webkit-transform:scale(1.1);transform:scale(1.1); *//*Acercamiento*/
+}
+
+.subtituloDetalles1{
+  font-family: Arial;
+  color: #3A73A8;
+  font-weight: normal;
+  font-size: 13px;
+}
+
+.subtituloDetalles2{
+  font-family: Arial;
+  color: black;
+  font-weight: normal;
+  font-size: 12px;
+}
