@@ -37,7 +37,7 @@ else{
     <script src="../util/js/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="../util/css/sweetalert2.min.css">
     <script src="../util/js/sweetalert2@10.js"></script>
-    <link rel="stylesheet" href="../util/css/estilo.css?v50" type="text/css">
+    <link rel="stylesheet" href="../util/css/estilo.css?v60" type="text/css">
     <link rel="stylesheet" type="text/css" href="../util/css/dataTables.bootstrap5.min.css">
     <script type="text/javascript" src="../util/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="../util/js/dataTables.bootstrap5.min.js"></script> 

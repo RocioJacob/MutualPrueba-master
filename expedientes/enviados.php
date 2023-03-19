@@ -6,37 +6,43 @@ include('../estructura/navegacion.php');
   <div class="container" id="mycontainer">
   <span class="subtituloMenu">BANDEJAS</span><br><br>
 
-    <?php 
-      $recibidos = mysqli_query($conexion, "SELECT count(*) as totalRecibidos FROM bandejas WHERE id_fin='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'");
-      $recibidos = mysqli_fetch_array($recibidos);
-      $recibidos = $recibidos['totalRecibidos'];
+  <?php 
+    $recibidos = mysqli_query($conexion, "SELECT count(*) as totalRecibidos FROM bandejas WHERE id_fin='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'");
+    $recibidos = mysqli_fetch_array($recibidos);
+    $recibidos = $recibidos['totalRecibidos'];
 
-      $tomados = mysqli_query($conexion, "SELECT count(*) as totalTomados FROM bandejas WHERE id_fin='$idAreaUsuario' AND estado='TOMADO' AND activado='0'");
-      $tomados = mysqli_fetch_array($tomados);
-      $tomados = $tomados['totalTomados'];
+    $tomados = mysqli_query($conexion, "SELECT count(*) as totalTomados FROM bandejas WHERE id_fin='$idAreaUsuario' AND estado='TOMADO' AND activado='0'");
+    $tomados = mysqli_fetch_array($tomados);
+    $tomados = $tomados['totalTomados'];
 
-      $enviados = mysqli_query($conexion, "SELECT count(*) as totalEnviados FROM bandejas WHERE id_inicio='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'");
-      $enviados = mysqli_fetch_array($enviados);
-      $enviados = $enviados['totalEnviados'];
+    $enviados = mysqli_query($conexion, "SELECT count(*) as totalEnviados FROM bandejas WHERE id_inicio='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'");
+    $enviados = mysqli_fetch_array($enviados);
+    $enviados = $enviados['totalEnviados'];
 
-      $sql = mysqli_query($conexion, "SELECT * FROM bandejas WHERE id_fin='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'order by id DESC");
-    ?>
+    $sql = mysqli_query($conexion, "SELECT * FROM bandejas WHERE id_fin='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'order by id DESC");
+  ?>
 
 <!-- Para computadora -->
   <!--div class="d-none d-sm-none d-md-block"-->
-    <div class="container text-center h-100 d-flex justify-content-center align-items-center">
-      <a href="recibidos.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">RECIBIDOS 
-        <span class="tituloBandeja"><?php echo "(".$recibidos.")";?></span></a>
+  <div class="container text-center h-100 d-flex justify-content-center align-items-center">
+    <a href="recibidos.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">RECIBIDOS 
+      <span class="tituloBandeja"><?php echo "(".$recibidos.")";?></span>
+    </a>
       
-      <a href="tomados.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">TOMADOS 
-        <span class="tituloBandeja"><?php echo "(".$tomados.")";?></span></a>
+    <a href="tomados.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">TOMADOS 
+      <span class="tituloBandeja"><?php echo "(".$tomados.")";?></span>
+    </a>
       
-      <a href="enviados.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">ENVIADOS 
-        <span class="tituloBandeja"><?php echo "(".$enviados.")";?></span></a>
-    </div><br><br>
+    <a href="enviados.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">ENVIADOS 
+      <span class="tituloBandeja"><?php echo "(".$enviados.")";?></span>
+    </a>
+  </div><br><br>
 
     <div>
-      <span id="subtituloBandejas">EXPEDIENTES RECIBIDOS </span>
+    <?php 
+    $sql = mysqli_query($conexion, "SELECT * FROM bandejas WHERE id_inicio='$idAreaUsuario' AND estado='ENVIADO' AND activado='0'");
+    ?>
+      <span id="subtituloBandejas">EXPEDIENTES ENVIADOS </span>
       <img id="imagenRecargar" title="comentario" src="../util/imagenes/recargar.png" width="35" height="35" onclick="recargar();">
       
       <table class="table table-bordered">
@@ -46,7 +52,6 @@ include('../estructura/navegacion.php');
         <td id="filaBandeja">Fecha</td>
         <td id="filaBandeja">Afiliado/Proveedor</td>
         <td id="filaBandeja">Detalles</td>
-        <td id="filaBandeja">Acciones</td>
         
         <?php 
         while($row = $sql->fetch_assoc()){
@@ -94,9 +99,6 @@ include('../estructura/navegacion.php');
                   </div>
               </a>
             </td>
-            <td id="detalleBandeja" style="text-align:center;">
-              <button onclick="tomarExpediente('<?php echo $row['id_expediente']?>', '<?php echo $row['anio']?>', '<?php echo $row['id_inicio'] ?>', '<?php echo $row['id_fin'] ?>')" id="botonAccionR">Tomar</button>
-            </td>
           </tr>
           
           <tr class="detalle<?php echo $row['id'];?>" style="display: none;">
@@ -118,14 +120,12 @@ include('../estructura/navegacion.php');
               } 
               ?>
 
-              <!--a href="expedientePdf.php" class="btn" id="verExpediente" title="Ver expediente" target="_blank">Carátula</a-->
-
               <a href="expedientePdf.php?idExpediente=<?php echo $idExpediente;?>&anio=<?php echo $anio;?>" class="btn" id="verExpediente" title="Ver expediente" target="_blank">Carátula</a>
 
               <?php 
               if(existeAfiliadoTitular($expediente['documento'])) { 
               ?>
-                <!--a href="" class="btn" id="botonGeneral" title="Cuenta corriente" target="_blank">Cta cte</a-->
+                <a href="" class="btn" id="botonGeneral" title="Cuenta corriente" target="_blank">Cuenta corriente</a>
               <?php 
               } 
               ?>
@@ -163,65 +163,6 @@ include('../estructura/navegacion.php');
       y.style.display = 'none'; //oculto boton -
     }
   }); 
-
-  function tomarExpediente(idExpediente, anio, areaInicio, areaFin){
-    var datos = {"idExpediente":idExpediente, "anio":anio, "areaInicio":areaInicio, "areaFin":areaFin};
-    Swal.fire({
-        title: '<span style="font-size:23px;">¿Desea tomar el expediente N°'+idExpediente+'?</span>',
-        width:'500px',
-        showCancelButton: true,
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
-        confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
-        allowOutsideClick: false,
-    }).then((result) => {
-          
-        if (result.isConfirmed) {
-          $.ajax({
-            url: 'tomar-expediente.php',
-            type:'POST',
-            data: datos,
-            beforeSend: function() {
-              //$("#loader").css('display','block');
-            },
-            success: function(data){
-              //console.log(data);
-              //$("#loader").css('display','none');
-              var jsonData = JSON.parse(data);
-              if(jsonData.salida == 0){
-                return mensajeExito(jsonData.mensaje, jsonData.salida2);
-              }
-              else{
-                return mensajeError(jsonData.mensaje);
-              }
-            }
-          });
-          return false;
-        }
-    });
-}
-
-function mensajeError($mensaje){
-  swal.fire({
-    title: $mensaje, 
-    icon: 'error',
-    width:'550px',
-    allowOutsideClick: false,
-    confirmButtonColor: '#03989e',
-  });
-}
-
-function mensajeExito($mensaje, $idExpediente){
-  Swal.fire({
-    icon: 'success',
-    width:'550px',
-    title: $mensaje, 
-    allowOutsideClick: false,
-    }).then(function(){
-        window.location.replace("tomados.php");
-  });
-}
 </script>
 
 
@@ -254,7 +195,7 @@ function mensajeExito($mensaje, $idExpediente){
   border: 2px solid;
   border-radius: 10px;
   font-size: 14px;
-  width: 115px;
+  width: 135px;
 }
 #verExpediente:hover, #botonGeneral:hover{
    color: #148F77;

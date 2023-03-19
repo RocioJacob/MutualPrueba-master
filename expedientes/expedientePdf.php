@@ -8,8 +8,10 @@ else{//Es un usuario empleado
       include('../util/funcionesexp.php');
       $documento = $_SESSION['documento'];
       $usuario = $_SESSION['usuario'];
-      
-      $identificador = $_SESSION['identificador'];
+      //$identificador = $_SESSION['identificador'];
+      $idExpediente = $_GET['idExpediente'];
+      $anio = $_GET['anio'];
+      $identificador = $idExpediente."-".$anio;
       
     $expediente = mysqli_query($conexion, "SELECT * FROM expedientes WHERE identificador='$identificador'");
     $expediente = mysqli_fetch_assoc($expediente);

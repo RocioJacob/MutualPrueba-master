@@ -245,6 +245,57 @@ function titularCargas($documento){
   return $response;
 }
 
+
+//Verifica si un afiliado es o no carga--------------
+function esCarga($documento){
+  $resultArray = habilitado($documento);
+  $arrayAfiliado = json_decode($resultArray, true);//Paso a json para ver si esta vacio
+  if (array_key_exists('message', $arrayAfiliado)){ //No existe afiliado
+    return false;
+  }
+  else{
+        $arrayAfiliado = datosHabilitados($resultArray);
+        if($arrayAfiliado['parentesco']!="TITULAR"){
+          return true; //es carga
+        }
+        else{
+          return false;
+        }
+  }
+}
+
+function datosHabilitados($response){
+  $array = [];
+  $resultArray = json_decode($response, true);
+  
+  foreach($resultArray as $key=>$data){
+    if(!is_array($data)){
+      $array[$key] = $data;
+    }
+  }
+  return $array;
+}
+
+//Devuelve si esta o no habilitado titular o carga
+function habilitado($documento){  
+   $curl = curl_init();
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => '10.8.0.1/mutpol/rest/habilitados',
+    //CURLOPT_URL => '192.168.0.5/mutpol/rest/habilitados',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array('dni:'.$documento, 'Content-Type: application/json'),
+  ));
+  $response = curl_exec($curl);
+  curl_close($curl);
+  return $response;
+}
+
 //Areas que pueden eliminar archivos de expedientes
 function esAreaEliminar($idAreaUsuario){
   if( ($idAreaUsuario == '3') or ($idAreaUsuario == '9') or ($idAreaUsuario == '11') or ($idAreaUsuario == '6')){
@@ -358,12 +409,12 @@ function listarArchivos($idExpediente, $idUsuario){
 function listarArchivosAnterior($idExpediente, $anio){
   $ruta1='../archivos/'.$anio.'/'.$idExpediente; 
   ?>
-  <span style="font-size: 14px; color:#3A73A8;">ARCHIVOS</span>
   <?php
   if (is_dir($ruta1)){ //Indica si el nombre de archivo es un directorio
     if ($dh = opendir($ruta1)){ //Abre un gestor de directorio   
   ?>
     <div class="col">
+      <span style="font-size: 14px; color:#3A73A8;">ARCHIVOS</span><br>
       <?php 
       while (($file = readdir($dh)) !== false){ //readdir — Lee una entrada desde un gestor de directorio
         $ext = pathinfo($file, PATHINFO_EXTENSION); //Obtengo la extension del archivo
@@ -509,6 +560,7 @@ function datosAfiliadoExpediente($documento){
   return $salida;
 }
 
+
 function datosTitular($response){
   $array = [];
   $resultArray = json_decode($response, true);
@@ -519,6 +571,38 @@ function datosTitular($response){
   }
   return $array;
 }
+
+function datosCargas($response){
+  $array = [];
+  $resultArray = json_decode($response, true);
+  $i = 0;
+  foreach($resultArray as $key=>$data){
+    if(is_array($data)){
+      foreach($data as $numero){
+        foreach($numero as $clave=>$elemento){
+          if(!is_array($elemento)){
+            $array[$i][$clave] = $elemento;
+          }
+        }
+        $i = $i+1;
+      }
+    }
+  }
+  return $array;;
+}
+
+function tienecargas($documento){
+  $resultArray = titularCargas($documento);
+  $arrayCarga = datosCargas($resultArray);
+  $longitud = count($arrayCarga);
+  if($longitud!=0){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
 
 function autorizadoEliminarArchivo($idUsuario){
   include('../admin/conexion.php');
@@ -789,6 +873,40 @@ function tieneComentarios($idExpediente, $anio){
     $i=$i+1;
   }
   return $salida;
+}
+
+function devolverComentarios($idExpediente, $anio){
+  include("../admin/conexion.php");
+  $result = mysqli_query($conexion, "SELECT * FROM log_expedientes WHERE id_expediente='$idExpediente' AND anio='$anio'");
+  if($result->num_rows>0){
+    ?>
+    <span style="font-size: 14px; color:#3A73A8;">COMENTARIOS</span><br>
+      <table class="table table-bordered">
+        <tr>
+          <td id="filaC">N°</td>
+          <td id="filaC">USUARIO</td>
+          <td id="filaC">COMENTARIO</td>
+          <?php 
+            $i=0;
+            $j=1;
+            while ($fila=$result->fetch_assoc()) {
+              if($fila['comentario']!=""){
+          ?>
+                <tr>
+                  <td id="detalleC"> <?php echo $j; ?></td>
+                  <td id="detalleC"> <?php echo $fila['usuario']; ?></td>
+                  <td id="detalleC"> <?php echo $fila['comentario']; ?></td>
+                </tr>
+                <?php
+                $j=$j+1;
+              }
+              $i=$i+1;
+            }
+            ?>
+        </tr>
+      </table>
+      <?php
+  }
 }
 
 function autorizadoAnularExpediente($idUsuario){

@@ -27,7 +27,7 @@ $trabajarAnuales = $usuario1['trabajar_anuales'];
     //Si esta archivado, solo las areas permitidas pueden ver los archivos
     if(estaArchivado($idExpediente, $anio)){
       if(verArchivoArchivado($idUsuario)){
-          if(($idExpediente<900)&&($anio<=2023)){
+          if(($idExpediente<912)&&($anio<=2023)){
             listarArchivosAnterior($idExpediente, $anio);
           }
           else{
@@ -36,7 +36,7 @@ $trabajarAnuales = $usuario1['trabajar_anuales'];
       }
     }
     else{ 
-        if(($idExpediente<900)&&($anio<=2023)){
+        if(($idExpediente<912)&&($anio<=2023)){
           listarArchivosAnterior($idExpediente, $anio);
         }
         else{
@@ -46,14 +46,13 @@ $trabajarAnuales = $usuario1['trabajar_anuales'];
     ?>
 
       <div class="center">
-        <a href="expedientePdf.php" target="_blank">
-          <button class="btnDetalles" type="submit" title="Anular Expediente">Carátula</button>
-        </a>
+        
+        <a href="expedientePdf.php?idExpediente=<?php echo $idExpediente;?>&anio=<?php echo $anio;?>" class="btn" id="verExpediente" title="Ver expediente" target="_blank">Carátula</a>
+
         <a href="ver-historial.php">
           <button class="btnDetalles" type="submit" title="Ver historial">Historial</button>
         </a>
 
-        
         <?php 
         if(!estaArchivado($idExpediente, $anio)){ //Expedientes archivados no pueden ser ANULADOS
           if(autorizadoAnularExpediente($idUsuario)){ //Puede anular 

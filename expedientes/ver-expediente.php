@@ -112,9 +112,13 @@ if(isset($_POST["id_expediente"])){
             <button class="btn" id="verExpediente" type="submit" title="Ver comentarios" onclick="mostrarComentarios();">Comentarios</button>
           <?php } ?>
 
-          <?php if(existeAfiliadoTitular($expediente['documento'])) { ?>
+          <?php 
+          if(existeAfiliadoTitular($expediente['documento'])) { 
+          ?>
             <a href="../detalles-usuario.php?id=<?php echo $expediente['documento'];?>" class="btn" id="botonGeneral" title="Cuenta corriente" target="_blank">Cuenta corriente</a>
-          <?php } ?>
+          <?php 
+          } 
+          ?>
             
           <?php $estadoActual = estadoActual($expediente['id']);
           if($estadoActual=="TOMADO"){ ?>
@@ -221,9 +225,9 @@ function devolverComentarios($id){
     ?>
       <table class="table table-bordered">
         <tr>
-          <td id="fila">N°</td>
-          <td id="fila">Usuario</td>
-          <td id="fila">Comentario</td>
+          <td id="filaComentario">N°</td>
+          <td id="filaComentario">Usuario</td>
+          <td id="filaComentario">Comentario</td>
           <?php 
             $i=0;
             $j=1;
@@ -231,9 +235,9 @@ function devolverComentarios($id){
               if($fila['comentario']!=""){
           ?>
                 <tr>
-                  <td id="detalle"> <?php echo $j; ?></td>
-                  <td id="detalle"> <?php echo $fila['usuario']; ?></td>
-                  <td id="detalle"> <?php echo $fila['comentario']; ?></td>
+                  <td id="detalleComentario"> <?php echo $j; ?></td>
+                  <td id="detalleComentario"> <?php echo $fila['usuario']; ?></td>
+                  <td id="detalleComentario"> <?php echo $fila['comentario']; ?></td>
                 </tr>
                 <?php
                 $j=$j+1;

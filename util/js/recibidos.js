@@ -19,10 +19,10 @@ function verRecibidos(idExpediente){
   } 
 }
 
-function tomar(idExpediente, areaInicio, areaFin){
-    var datos = {"idExpediente":idExpediente, "areaInicio":areaInicio, "areaFin":areaFin};
+function tomarExpediente(idExpediente, anio, areaInicio, areaFin){
+    var datos = {"idExpediente":idExpediente, "anio":anio, "areaInicio":areaInicio, "areaFin":areaFin};
     Swal.fire({
-        title: '¿Desea tomar el expediente N°'+idExpediente+'?',
+        title: '<span style="color:red;">¿Desea tomar el expedientee N°</span>'+idExpediente+'?',
         width:'550px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
