@@ -1,0 +1,55 @@
+  #botonIngresar{
+    height: 40px; 
+    width: 200px; 
+    border: 2px solid;
+    border-radius: 25px;
+    font-size: 15px;
+    margin:5px;
+    margin-bottom: 5%;
+    background-color: #0F4C75;
+    border-color: #FFC947;
+    color: white;
+  }
+
+  #botonIngresar:hover {
+  background: #1B262C;
+  color: #EFEFEF !important;
+  font-weight: bold;
+
+  }
+  #imagen{
+    height: 25%;
+    width: 25%;
+    margin-top:0%;
+  }
+  #usuario, #clave{
+  text-transform:uppercase; 
+  border-color: #0F4C75; 
+  border-radius: 25px; 
+  text-align: center;
+  border: 3% solid;
+  margin: 5px;
+  }
+  .titulo{
+    color: #BBE1FA;
+    margin: 1px;
+    text-align: center; /*alineacion*/
+    font-size: 30px;  /*tamaño letra*/
+    font-weight: 600; /*grosor letra*/
+  }
+  body{
+      background-image: url("../imagenes/fondomutualcolor.png");
+  }
+
+.input-group { 
+  width: 25%;
+}
+@media (max-width: 767px) {
+   .input-group { 
+    width: 50%;
+}
+ }
+
+#clave, #usuario{
+  width: 50%;
+}
