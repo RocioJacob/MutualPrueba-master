@@ -1,4 +1,38 @@
 <?php
+//Verifica si hay conexion con la VPN
+function estaconectado(){
+  //$salida = testServidorWeb("http://10.8.0.1");
+  $salida = testServidorWeb("http://192.168.0.5/mutpol");
+  if($salida){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function testServidorWeb($servidor) {
+    stream_context_set_default(['http' => ['timeout' => 3]]);
+    $a = @get_headers($servidor);
+    if (is_array($a)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function estaconectadoAfiliacion(){
+  //$salida = testServidorWeb("http://10.8.1.1");
+  $salida = testServidorWeb("http://192.168.0.6");
+  if($salida){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+
 
 function idAreaUsuario($documento){
   include('../admin/conexion.php');
@@ -20,7 +54,7 @@ function puedeAutorizar($id){
   include('../admin/conexion.php');
   $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$id'");
   $usuario = mysqli_fetch_assoc($usuario);
-  $autorizado = $usuario['autorizado'];
+  $autorizado = $usuario['permiso_autorizar_expediente'];
   if($autorizado=='0'){
     return true;
   }
@@ -100,7 +134,7 @@ function mostrarRuta($idExpediente, $anio){
   $result = mysqli_query($conexion, "SELECT * FROM log_expedientes WHERE id_expediente='$idExpediente' AND anio='$anio'");
   if($result->num_rows>0){
   ?>
-    <span style="font-size: 14px; color:#3A73A8;">RUTA DEL EXPEDIENTE</span><br>
+    <h1 class="subtitulo">Ruta del expediente</h1><br>
   <?php  
     $fin2 = "";
     
@@ -110,7 +144,7 @@ function mostrarRuta($idExpediente, $anio){
         if($fila['id_inicio']!=$fin2){
             $inicio = mostrarArea($fila['id_inicio']);
             $fin = mostrarArea($fila['id_fin']);
-            $flecha = "<img title='GENERADO' src='../util/imagenes/flecha.jpg' width='25' height='25'>";
+            $flecha = "<img title='GENERADO' src='../util/imagenes/flechaN.png' width='25' height='25'>";
             echo $inicio." ".$flecha." ".$fin;
         }
         else{
@@ -229,8 +263,8 @@ function existeAfiliadoTitular($documento){
 function titularCargas($documento){  
   $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'http://10.8.0.1/mutpol/rest/titular_cargas',
-    //CURLOPT_URL => 'http://192.168.0.5/mutpol/rest/titular_cargas',
+    //CURLOPT_URL => 'http://10.8.0.1/mutpol/rest/titular_cargas',
+    CURLOPT_URL => 'http://192.168.0.5/mutpol/rest/titular_cargas',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -280,8 +314,8 @@ function datosHabilitados($response){
 function habilitado($documento){  
    $curl = curl_init();
   curl_setopt_array($curl, array(
-    CURLOPT_URL => '10.8.0.1/mutpol/rest/habilitados',
-    //CURLOPT_URL => '192.168.0.5/mutpol/rest/habilitados',
+    //CURLOPT_URL => '10.8.0.1/mutpol/rest/habilitados',
+    CURLOPT_URL => '192.168.0.5/mutpol/rest/habilitados',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -324,14 +358,14 @@ function mostrarArchivos($id, $anio, $tipoUsuario, $idAreaUsuario, $idUsuario){
           ?>
               <div class="col">
                 <a href='<?php echo $archivo?>' target='_blank' style="text-decoration:none;">
-                  <img src='../util/imagenes/pdf.png' height='50' width='50' align=center>
+                  <img src='../util/imagenes/pdf.png' height='50' width='50' align='left'>
                   <button id="botonAcciones">Ver</button>
                 </a>
 
               <?php 
                 if(esAreaEliminar($idAreaUsuario)){ 
               ?>
-                  <button onclick="eliminar('<?php echo $archivo ?>','<?php echo $id ?>', '<?php echo $idUsuario ?>')" id="botonAcciones">Eliminar</button>
+                  <button onclick="eliminarArchivo('<?php echo $archivo ?>','<?php echo $id ?>', '<?php echo $idUsuario ?>')" id="botonAcciones">Eliminar</button>
               <?php 
                 } 
               ?>
@@ -348,7 +382,7 @@ function mostrarArchivos($id, $anio, $tipoUsuario, $idAreaUsuario, $idUsuario){
 ?>
               <div class="col">
                 <a href='<?php echo $archivo?>' target='_blank' style="text-decoration:none; color:#3A73A8;">
-                  <img src='../imagenes/foto-jpg.png' height='50' width='50' align=center>
+                  <img src='../imagenes/foto-jpg.png' height='50' width='50' align='left'>
                   <button id="botonAcciones">Ver</button></a>
                 
                 <?php 
@@ -375,11 +409,40 @@ function mostrarArchivos($id, $anio, $tipoUsuario, $idAreaUsuario, $idUsuario){
 }
 
 
-function listarArchivos($idExpediente, $idUsuario){
+//Utiliza la tabla "archivos" para listar todos los archivos existentes para ese expediente
+function listarArchivosRecibidos($idExpediente, $idUsuario){
   include('../admin/conexion.php');
   $archivos = mysqli_query($conexion, "SELECT * FROM archivos WHERE id_expediente = '$idExpediente' AND eliminado = '1' ORDER BY fecha_subida ASC");
   ?>
-  <span style="font-size: 14px; color:#3A73A8;">ARCHIVOS</span><br>
+  <span style="font-size: 20px; color:#3A73A8;">Archivos</span><br>
+
+  <?php
+  while($archivo=$archivos->fetch_assoc()){
+    $link = $archivo['direccion'];
+    $idArchivo = $archivo['id'];
+
+    if(file_exists($link)){
+    ?>
+      <div class="col">
+          <a href='<?php echo $link?>' target='_blank' style="text-decoration:none;">
+            <img src='../util/imagenes/pdf.png' height='50' width='50' align=center>
+            <button id="botonAcciones">Ver</button>
+          </a>
+        <?php
+        echo $archivo['nombre'];
+      ?>  
+      </div><br>
+    <?php
+    }
+  }
+}
+
+//Utiliza la tabla "archivos"
+function listarArchivosTomados($idExpediente, $idUsuario){
+  include('../admin/conexion.php');
+  $archivos = mysqli_query($conexion, "SELECT * FROM archivos WHERE id_expediente = '$idExpediente' AND eliminado = '1' ORDER BY fecha_subida ASC");
+  ?>
+  <h1 class="subtitulo">Archivos</h1><br>
 
   <?php
   while($archivo=$archivos->fetch_assoc()){
@@ -393,10 +456,38 @@ function listarArchivos($idExpediente, $idUsuario){
             <img src='../util/imagenes/pdf.png' height='50' width='50' align=center><button id="botonAcciones">Ver</button>
           </a>
         <?php
-        if(autorizadoEliminarArchivo($idUsuario)){ ?>
-          <button onclick="eliminar('<?php echo $idExpediente ?>', '<?php echo $idUsuario ?>', '<?php echo $link ?>', '<?php echo $idArchivo ?>',)" id="botonAcciones">Eliminar</button>
+        if(permisoEliminarArchivo($idUsuario)){ ?>
+          <button onclick="eliminarArchivo('<?php echo $idExpediente ?>', '<?php echo $idUsuario ?>', '<?php echo $link ?>', '<?php echo $idArchivo ?>',)" id="botonAccionEliminar" class="botonAccion">Eliminar</button>
         <?php
         }
+        echo $archivo['nombre'];
+      ?>  
+      </div><br>
+    <?php
+    }
+  }
+}
+
+
+//Utiliza la tabla "archivos"
+function listarArchivosEnviados($idExpediente, $idUsuario){
+  include('../admin/conexion.php');
+  $archivos = mysqli_query($conexion, "SELECT * FROM archivos WHERE id_expediente = '$idExpediente' AND eliminado = '1' ORDER BY fecha_subida ASC");
+  ?>
+  <span style="font-size: 20px; color:#3A73A8;">Archivos</span><br>
+
+  <?php
+  while($archivo=$archivos->fetch_assoc()){
+    $link = $archivo['direccion'];
+    $idArchivo = $archivo['id'];
+
+    if(file_exists($link)){
+    ?>
+      <div class="col">
+          <a href='<?php echo $link?>' target='_blank' style="text-decoration:none;">
+            <img src='../util/imagenes/pdf.png' height='50' width='50' align=center><button id="botonAcciones">Ver</button>
+          </a>
+        <?php
         echo $archivo['nombre'];
       ?>  
       </div><br>
@@ -414,7 +505,7 @@ function listarArchivosAnterior($idExpediente, $anio){
     if ($dh = opendir($ruta1)){ //Abre un gestor de directorio   
   ?>
     <div class="col">
-      <span style="font-size: 14px; color:#3A73A8;">ARCHIVOS</span><br>
+      <span style="font-size: 20px; color:#3A73A8;">Archivos</span><br>
       <?php 
       while (($file = readdir($dh)) !== false){ //readdir — Lee una entrada desde un gestor de directorio
         $ext = pathinfo($file, PATHINFO_EXTENSION); //Obtengo la extension del archivo
@@ -448,6 +539,319 @@ function listarArchivosAnterior($idExpediente, $anio){
   }
 }
 
+
+//*************************************************************************************************
+//************** EXPEDIENTES ARCHIVADOS ***********************************************************
+
+//Utiliza la tabla "archivos"
+function listarArchivosArchivadosNuevo($idExpediente, $anio, $idUsuario){
+  include('../admin/conexion.php');
+  $archivos = mysqli_query($conexion, "SELECT * FROM archivos WHERE id_expediente = '$idExpediente' AND anio = '$anio' AND eliminado = '1' ORDER BY fecha_subida ASC");
+
+  $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
+  $usuario = mysqli_fetch_assoc($usuario);
+  $eliminarArchivoArchivado = $usuario['permiso_eliminar_archivo_archivado'];
+
+  ?>
+  <span style="font-size: 20px; color:#3A73A8;">Archivos</span><br>
+
+  <?php
+  while($archivo=$archivos->fetch_assoc()){
+    $link = $archivo['direccion'];
+    $idArchivo = $archivo['id'];
+    $extension = $archivo['extension'];
+
+    if(file_exists($link)){
+    ?>
+        <div class="col">
+
+        <?php
+        if($extension == "pdf"){
+        ?>
+          <a href='<?php echo $link?>' target='_blank' style="text-decoration:none;">
+            <img src='../util/imagenes/pdf.png' height='50' width='50' align=center><button id="botonAcciones">Ver</button>
+          </a>
+        <?php
+        }
+        if(($extension == "jpg") or ($extension == "jpeg")){
+        ?>
+          <a href='<?php echo $link?>' target='_blank' style="text-decoration:none;">
+            <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center><button class="botonAccion" id="botonAcciones">Ver</button>
+          </a>
+        <?php
+        }
+
+        if($eliminarArchivoArchivado == "0"){
+        ?>
+          <button onclick="eliminarArchivoArchivadoNuevo('<?php echo $idExpediente ?>', '<?php echo $anio ?>','<?php echo $idUsuario ?>', '<?php echo $link ?>', '<?php echo $idArchivo ?>',)" id="botonAccionesEliminar1" class="botonAccion">Eliminar</button>
+        <?php
+        }else{
+        ?>
+          <button class="botonAccion" id="botonAccionesEliminar2" disabled>Eliminar</button>
+        <?php  
+        }
+
+        echo $archivo['nombre'];
+        ?>  
+      </div><br>
+    <?php
+    }
+  }
+}
+
+function listarArchivosArchivadosViejo($idExpediente, $anio, $idUsuario){
+  include('../admin/conexion.php');
+  $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
+  $usuario = mysqli_fetch_assoc($usuario);
+  $eliminarArchivoArchivado = $usuario['permiso_eliminar_archivo_archivado'];
+  $permisoVerArchivoArchivado = $usuario['permiso_ver_archivo_archivado'];
+
+  $ruta1='../archivos/'.$anio.'/'.$idExpediente; 
+  ?>
+  <?php
+  if (is_dir($ruta1)){ //Indica si el nombre de archivo es un directorio
+    if ($dh = opendir($ruta1)){ //Abre un gestor de directorio   
+  ?>
+    <div class="col">
+      <h1 class="subtitulo">Archivos</h1><br>
+      <?php 
+      
+      while (($file = readdir($dh)) !== false){ //readdir — Lee una entrada desde un gestor de directorio
+          
+        if ($file != '.' && $file != '..') { //La condición $file != '.' && $file != '..' se utiliza para excluir las entradas especiales "." y ".." que se encuentran en los directorios. Estas entradas representan el directorio actual y el directorio padre, respectivamente.
+
+          $ext = pathinfo($file, PATHINFO_EXTENSION); //Obtengo la extension del archivo
+          $nombre = pathinfo($file, PATHINFO_FILENAME); //Obtengo el nombre del archivo
+              
+          
+            if (is_dir($ruta1) && $file != '.' && $file != '..' && ($ext =="pdf" or $ext =="PDF")){ 
+              $archivo = $ruta1.'/'.$file;
+              if($permisoVerArchivoArchivado == "0"){
+            ?>
+                <img src='../util/imagenes/pdf.png' height='50' width='50' align=center style="margin-bottom: 5px; margin-right: 5px;"><a href='<?php echo $archivo?>' target='_blank' style="text-decoration:none;"><button id="botonAcciones">Ver</button>
+              </a>
+
+              <?php
+              }
+              else{
+              ?>  
+                <img src='../util/imagenes/pdf.png' height='50' width='50' align=center style="margin-bottom: 5px; margin-right: 5px;"><button id="botonAcciones" disabled>Ver</button>
+            <?php
+              }
+            }
+            ?>
+            
+            <?php   
+            if (is_dir($ruta1) && $file != '.' && $file != '..' && (($ext =="jpg") or ($ext == "png") or ($ext == "jpeg") or ($ext =="JPG") or ($ext == "PNG") or ($ext == "JPEG"))){ 
+              $archivo = $ruta1.'/'.$file;
+
+              if($permisoVerArchivoArchivado == "0"){
+            ?>
+                <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center style="margin-right:5px; margin-bottom: 5px;"><a href='<?php echo $archivo?>' target='_blank' style="text-decoration:none;"><button id="botonAcciones">Ver</button></a>
+              <?php
+              }
+              else{
+              ?>
+                <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center style="margin-right:5px; margin-bottom: 5px;"><button id="botonAcciones" disabled>Ver</button></a>
+            <?php
+              }
+            }
+            ?>
+
+          <?php
+          if($eliminarArchivoArchivado == "0"){
+          ?>
+            <button onclick="eliminarArchivoArchivadoViejo('<?php echo $archivo ?>', '<?php echo $file ?>', '<?php echo $idExpediente ?>', '<?php echo $anio ?>', '<?php echo $idUsuario ?>')" id="botonAccionesEliminar1" class="botonAccion">Eliminar</button>
+          <?php
+          }
+          else{
+          ?>
+            <button id="botonAccionesEliminar2" disabled class="botonAccion">Eliminar</button>
+          <?php  
+          }
+
+        echo $nombre.".".$ext;
+        echo"<br>";
+        }//while
+      }
+      ?>
+    <div><br>
+    <?php 
+    closedir($dh);
+    }
+  }
+}
+//********************************************************************************************************
+//********************************************************************************************************
+
+
+//PARA LISTAR ARCHIVOS VIEJOS
+function listarArchivosViejo($idExpediente, $anio, $idUsuario){
+  include('../admin/conexion.php');
+  $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
+  $usuario = mysqli_fetch_assoc($usuario);
+  $eliminarArchivo = $usuario['permiso_eliminar_archivo'];
+  $verArchivo = $usuario['permiso_ver_archivo'];
+
+  $ruta1='../archivos/'.$anio.'/'.$idExpediente; 
+  ?>
+  <?php
+  if (is_dir($ruta1)){ //Indica si el nombre de archivo es un directorio
+    if ($dh = opendir($ruta1)){ //Abre un gestor de directorio   
+  ?>
+    <div class="col">
+      <h1 class="subtitulo">Archivos</h1><br>
+      <?php 
+      
+      while (($file = readdir($dh)) !== false){ //readdir — Lee una entrada desde un gestor de directorio
+          
+        if ($file != '.' && $file != '..') { //La condición $file != '.' && $file != '..' se utiliza para excluir las entradas especiales "." y ".." que se encuentran en los directorios. Estas entradas representan el directorio actual y el directorio padre, respectivamente.
+
+          $ext = pathinfo($file, PATHINFO_EXTENSION); //Obtengo la extension del archivo
+          $nombre = pathinfo($file, PATHINFO_FILENAME); //Obtengo el nombre del archivo
+              
+          if (is_dir($ruta1) && $file != '.' && $file != '..' && ($ext =="pdf" or $ext =="PDF")){ 
+            $archivo = $ruta1.'/'.$file;
+
+            if($verArchivo == "0"){
+          ?>
+              <img src='../util/imagenes/pdf.png' height='50' width='50' align=center style="margin-bottom: 5px; margin-right: 5px;"><a href='<?php echo $archivo?>' target='_blank' style="text-decoration:none;"><button id="botonAcciones">Ver</button></a>
+            <?php
+            }
+            else{
+            ?>
+              <img src='../util/imagenes/pdf.png' height='50' width='50' align=center style="margin-bottom: 5px; margin-right: 2px;"><button id="botonAcciones" disabled>Ver</button></a>
+            <?php
+            }
+          }
+          ?>
+            
+          <?php   
+          if (is_dir($ruta1) && $file != '.' && $file != '..' && (($ext =="jpg") or ($ext == "png") or ($ext == "jpeg") or ($ext =="JPG") or ($ext == "PNG") or ($ext == "JPEG"))){ 
+            $archivo = $ruta1.'/'.$file;
+
+            if($verArchivo == "0"){
+          ?>           
+              <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center style="margin-right:2px; margin-bottom: 5px;">
+              <a href='<?php echo $archivo?>' target='_blank' style="text-decoration:none;"><button id="botonAcciones">Ver</button>
+            </a>
+
+            <?php
+            }
+            else{
+            ?>
+              <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center style="margin-right:2px; margin-bottom: 5px;"><button id="botonAcciones" disabled>Ver</button>
+            <?php
+            }
+          }
+          ?>
+
+          <?php
+          if($eliminarArchivo == "0"){
+          ?>
+            <button onclick="eliminarArchivoViejo('<?php echo $archivo ?>', '<?php echo $file ?>', '<?php echo $idExpediente ?>', '<?php echo $anio ?>', '<?php echo $idUsuario ?>')" id="botonAccionesEliminar1" class="botonAccion">Eliminar</button>
+          <?php
+          }
+          else{
+          ?>
+            <button id="botonAccionesEliminar2" disabled class="botonAccion">Eliminar</button>
+          <?php  
+          }
+
+        echo $nombre.".".$ext;
+        echo"<br>";
+        }//while
+      }
+      ?>
+    <div><br>
+    <?php 
+    closedir($dh);
+    }
+  }
+}
+
+
+//PARA LISTAR ARCHIVOS NUEVOS - Utiliza la tabla "archivos"
+function listarArchivosNuevo($idExpediente, $anio, $idUsuario){
+  include('../admin/conexion.php');
+  $archivos = mysqli_query($conexion, "SELECT * FROM archivos WHERE id_expediente = '$idExpediente' AND anio = '$anio' AND eliminado = '1' ORDER BY fecha_subida ASC");
+
+  $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
+  $usuario = mysqli_fetch_assoc($usuario);
+  $eliminarArchivo = $usuario['permiso_eliminar_archivo'];
+  $verArchivo = $usuario['permiso_ver_archivo'];
+
+  ?>
+  <h1 class="subtitulo">Archivos</h1><br>
+
+  <?php
+  while($archivo=$archivos->fetch_assoc()){
+    $link = $archivo['direccion'];
+    $idArchivo = $archivo['id'];
+    $extension = $archivo['extension'];
+
+    if(file_exists($link)){
+    ?>
+        <div class="col">
+
+        <?php
+        if($extension == "pdf"){
+          if($verArchivo == "0"){
+        ?>
+            <img src='../util/imagenes/pdf.png' height='50' width='50' align=center>
+            <a href='<?php echo $link?>' target='_blank' style="text-decoration:none;">
+              <button id="botonAcciones">Ver</button>
+            </a>
+        <?php
+          }
+          else{
+          ?>
+            <img src='../util/imagenes/pdf.png' height='50' width='50' align=center>
+            <button id="botonAcciones" disabled>Ver</button>
+        <?php  
+          }
+        }
+        ?>
+
+        <?php
+        if(($extension == "jpg") or ($extension == "jpeg")){
+          if($verArchivo == "0"){
+        ?>
+            <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center>
+            <a href='<?php echo $link?>' target='_blank' style="text-decoration:none;"><button id="botonAcciones">Ver</button></a>
+          <?php
+          }
+          else{
+          ?>
+            <img src='../util/imagenes/foto-jpg.png' height='50' width='50' align=center><button id="botonAcciones" disabled>Ver</button>
+        <?php
+          }
+        }
+        ?>
+
+        <?php
+        if($eliminarArchivo == "0"){
+        ?>
+          <button onclick="eliminarArchivoNuevo('<?php echo $idExpediente ?>', '<?php echo $anio ?>','<?php echo $idUsuario ?>', '<?php echo $link ?>', '<?php echo $idArchivo ?>',)" id="botonAccionesEliminar1" class="botonAccion">Eliminar</button>
+        <?php
+        }else{
+        ?>
+          <button id="botonAccionesEliminar2" disabled class="botonAccion" >Eliminar</button>
+        <?php  
+        }
+
+        echo $archivo['nombre'];
+        ?>  
+      </div><br>
+    <?php
+    }
+  }
+}
+
+
+
+
+
 function obtenerfechaActual(){
   date_default_timezone_set('America/Argentina/Buenos_Aires');
   $hoy=date("d-m-Y",time());
@@ -461,7 +865,6 @@ function nombreArea($id){
   $area = $area['nombre'];
   return $area;
 }
-
 
 function nombreUsuario($idUsuario){
   include('../admin/conexion.php');
@@ -524,6 +927,14 @@ function estaPendiente($idExpediente){
     }
 }
 
+function estadoAutorizacion($idExpediente){
+  include('../admin/conexion.php');
+  $expediente = mysqli_query($conexion, "SELECT * FROM expedientes WHERE id='$idExpediente'");
+  $expediente = mysqli_fetch_assoc($expediente);
+  $autorizado = $expediente['autorizado'];
+  return $autorizado;
+}
+
 
 
 function prioridadAlta($idExpediente){
@@ -532,6 +943,19 @@ function prioridadAlta($idExpediente){
   $expediente = mysqli_fetch_assoc($expediente);
   $prioridad = $expediente['prioridad'];
     if($prioridad=="ALTA"){
+      return true;
+    }
+    else{
+      return false;
+    }
+}
+
+function estaOculto($idExpediente){
+  include('../admin/conexion.php');
+  $expediente = mysqli_query($conexion, "SELECT * FROM expedientes WHERE id='$idExpediente'");
+  $expediente = mysqli_fetch_assoc($expediente);
+  $oculto = $expediente['oculto'];
+    if($oculto == "0"){
       return true;
     }
     else{
@@ -604,11 +1028,11 @@ function tienecargas($documento){
 }
 
 
-function autorizadoEliminarArchivo($idUsuario){
+function permisoEliminarArchivo($idUsuario){
   include('../admin/conexion.php');
   $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
   $usuario = mysqli_fetch_assoc($usuario);
-  $autorizado = $usuario['autorizado_eliminar_archivo'];
+  $autorizado = $usuario['permiso_eliminar_archivo'];
     if($autorizado==0){
       return true;
     }
@@ -842,7 +1266,25 @@ function mostrarDatosExpediente($idExpediente, $anio){
         } 
         ?>
     </div>
+
+    <div class="row">
+      <div class="col"><span class="subtituloDetalles1">ESTA OCULTO?</span><span class="subtituloDetalles2">
+      <?php 
+        if($expediente['oculto']=='0'){ 
+          echo "SI".'<br>';
+        ?>
+          </span></div>
+          <?php 
+        }else{ 
+          echo "NO".'<br>';
+        ?>
+          </span></div>
+        <?php 
+        } 
+        ?>
+    </div>
     <br>
+
   <?php
   }
 }
@@ -880,10 +1322,10 @@ function devolverComentarios($idExpediente, $anio){
   $result = mysqli_query($conexion, "SELECT * FROM log_expedientes WHERE id_expediente='$idExpediente' AND anio='$anio'");
   if($result->num_rows>0){
     ?>
-    <span style="font-size: 14px; color:#3A73A8;">COMENTARIOS</span><br>
+    <span style="font-size: 20px; color:#3A73A8;">Comentarios</span><br>
       <table class="table table-bordered">
         <tr>
-          <td id="filaC">N°</td>
+          <td id="filaC" style="width: 5px">N°</td>
           <td id="filaC">USUARIO</td>
           <td id="filaC">COMENTARIO</td>
           <?php 
@@ -926,7 +1368,20 @@ function autorizadoDesarchivarExpediente($idUsuario){
   include('../admin/conexion.php');
   $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
   $usuario = mysqli_fetch_assoc($usuario);
-  $autorizado = $usuario['autorizado_desarchivar'];
+  $autorizado = $usuario['permiso_desarchivar_expediente'];
+    if($autorizado==0){
+      return true;
+    }
+    else{
+      return false;
+    }
+}
+
+function permisoArchivarExpediente($idUsuario){
+  include('../admin/conexion.php');
+  $usuario = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE id='$idUsuario'");
+  $usuario = mysqli_fetch_assoc($usuario);
+  $autorizado = $usuario['permiso_archivar_expediente'];
     if($autorizado==0){
       return true;
     }
@@ -947,4 +1402,58 @@ function agregarArchivoArchivado($idUsuario){
       return false;
     }
 }
+
+
+function expedienteConAutorizacion($idExpediente){
+  include('../admin/conexion.php');
+  $nombreTramite = mysqli_query($conexion, "SELECT * FROM expedientes WHERE id='$idExpediente'");
+  $nombreTramite = mysqli_fetch_array($nombreTramite);
+  $nombreTramite = $nombreTramite['nombre_tramite'];
+
+  $tramite = mysqli_query($conexion, "SELECT * FROM tramites WHERE nombre='$nombreTramite'");
+  $tramite = mysqli_fetch_assoc($tramite);
+  $tramite = $tramite['autorizacion'];
+  if($tramite == 'SI'){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+
+function idAreaInicio($idExpediente){
+  include('../admin/conexion.php');
+  $areaInicio = mysqli_query($conexion, "SELECT * FROM bandejas WHERE id_expediente='$idExpediente'");
+  $areaInicio = mysqli_fetch_assoc($areaInicio);
+  $areaInicio = $areaInicio['id_inicio'];
+  return $areaInicio;
+}
+
+function idAreaFin($idExpediente){
+  include('../admin/conexion.php');
+  $areaFin = mysqli_query($conexion, "SELECT * FROM bandejas WHERE id_expediente='$idExpediente'");
+  $areaFin = mysqli_fetch_assoc($areaFin);
+  $areaFin = $areaFin['id_fin'];
+  return $areaFin;
+}
+
+
+function idExpedienteGeneral($id){
+  include('../admin/conexion.php');
+  $expediente = mysqli_query($conexion, "SELECT * FROM expedientes WHERE id='$id'");
+  $expediente = mysqli_fetch_assoc($expediente);
+  $id_expediente = $expediente['id_expediente'];
+  return $id_expediente;
+}
+
+function anioExpedienteGeneral($id){
+  include('../admin/conexion.php');
+  $expediente = mysqli_query($conexion, "SELECT * FROM expedientes WHERE id='$id'");
+  $expediente = mysqli_fetch_assoc($expediente);
+  $anio_expediente = $expediente['anio'];
+  return $anio_expediente;
+}
+
 ?>
+

@@ -1,61 +1,146 @@
-
-/**** INDEX.PHP ***/
-
+/* ESTILO menu-principal.php*/
 body{
-    background-image: url("../imagenes/fondo6.jpg");
+    background-image: url("../imagenes/fondo2.jpg");
+}
+
+.titulo{
+  color: #0F4C75;
+  text-align: center;
+  font-size: 160%;
+  
+}
+.subtitulo{
+  color: #185ADB;
+  text-align: left;
+  font-size: 150%;
+}
+hr{
+  border-color: #FFC947;
 }
 
 #barraNavegacion{
-  background-color: #1C5D88;
+  background-image: url("../imagenes/fondomutual.png");
 }
 
 #mycontainer { max-width: 1300px !important; }
 
-.subtituloMenu{
-  font-size: 22px;
-  color: black;|
-  font-family: 'Arial', cursive;
+.btn-boton{
+  color: #BBE1FA;
+  text-align: center;
+  background-color: #0F4C75;
+  height: 15vw;
+  width: 20%;
+  margin-bottom: 2%;
+  margin-right: 2%;
+  border-radius: 2vh;   /*uso vh para que el radio se base en la altura y se modifique cuando cambia el tamaño de los botones*/
+}
+
+.btn-boton:hover{
+  border-color: #BBE1FA;
+
+}
+
+.iconos{
+  height: 12vh;
+  width: 12vh;
+  margin: 3%;
+
+}
+#cajaDeBotones{
+  text-align: center;
+  font-size: 100%;
+}
+
+                /** ESTRUCTURA/navegacion.php**/
+
+#barraNavegacion{
+  display: flexbox;
+  width: 100%;
+  height: 10%;
+  margin-right: 0 auto;
+  margin-left: 0 auto;
+}
+.imagenLogoBarra{
+  width: 100%;
+  height: 100%;
+}
+.cajaDeLogo{
+  width: 5%;
+  height: auto;
+  margin-right: 2%;
+}
+.cajaNavegador{
+  margin: 0;
+  text-align: center;
+
+}
+.container-fluid{
+  margin-right: 0;
+}
+#usuarioySalir{
+  width: 50%;
+  text-align: right;
+  padding-left: 0%;
+  padding-right: 0%;
+}
+.nombreUsuario{
+  /*margin-top: 2%; 
+  margin-right: 2%; */
+  color: white;
+  font-size: 100%;
   text-align: left;
-  font-weight: 400;
+}
+#salir.btn{
+  float:right;
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid #FFC947;
+  border-radius: 1vw;
+  text-align: right;
+  font-size: 3vh;
+  width: auto;
+}
+.iconoSalir{
+  width: 2vw;
+  height: 2vw;
+  
+  float: left;
+}
+.nav-item{
+  width: 10%;
+}
+.iconoNavegador{
+  width: 60%;
+  height: 60%;
+  text-align: center;
 }
 
-#usuario, #clave{
-	text-transform:uppercase; 
-	border-color: #2874A6; 
-	border-radius: 25px; 
-	text-align: center; 
-	margin: 5px;
-  font-size: 15px;
+.nav-link{
+  color: white;
+  margin-right: 2vw;
+}
+.dropdown-menu{
+ border-radius: 1vh;
+ /*background-image: url(../util/imagenes/fondomutualcolor.png);*/
+ /*background: radial-gradient(#EFEFEF, #1B262C);*/
 }
 
-#tituloPrincipal{
-  font-family: Arial;
-	color: #003366;
-  text-align: center; /*alineacion*/
-  font-size: 27px;  /*tamaño letra*/
-  font-weight: 500; /*grosor letra*/
-  margin: 1px;
+.dropdown-item{
+  background-image: url(../util/imagenes/fondomutualcolor.png);
 }
 
-#botonIngresar{
-    height: 40px; 
-    width: 150px; 
-    border: 2px solid;
-    border-radius: 25px;
-    font-size: 15px;
-    background-color: #148F77;
-    color: white;
-    margin:1px;
- }
-
-#botonIngresar:hover {
-  background: white;
-  color: #148F77 !important;
+.dropdown-item:hover{
+  background-color: #1B262C; /* url(../util/imagenes/fondomutualcolor);*/
+  color: white;
+  border-radius: 1vh;
+  cursor: pointer;
 }
-
-#imagen{
-   height: 275px;
-   width: 225px;
+.dropdown-toggle:hover, .nav-link:hover{
+  color: #A4A2A2;
+  
+  border-radius: 1vh;
+  -webkit-transform:scale(1.1);transform:scale(1.1); /*acercamiento*/
+  cursor: pointer;
 }
 
 
@@ -72,7 +157,7 @@ body{
   float: left;
   border-radius: 15px; /*redondeo de las esquinas*/
   /*font-family: 'Georgia', cursive;*/
-  font-family: 'Arial', cursive;
+  font-family: 'Georgia', cursive;
   font-size: 16px; /*tamaño letra*/
   color: white; /*color letra*/
   /*text-decoration: none;  */
@@ -93,28 +178,116 @@ body{
 
 
 
+        /*EXPEDIENTES/detalles-expedientes.php*/
 
-/**EXPEDIENTES/generar-expediente.php**/
-#tituloFormulario{
-  color:#0072BC;
+
+
+.caja{ 
+  border: 0.1vh solid #0072BC;
+  border-radius: 1vh;
+  padding: 1%;
 }
 
-#botonGenerar{
-  background-color: #148F77;
+.subtituloArchivos{
+  /*font-family: 'Georgia', cursive; */
+  font-family: Arial;
+  text-align: left;
+  font-size: 100%;
+}
+
+
+.btnDetalles, #botonAcciones, #botonAccionEliminar{
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  border-color: #BBE1FA;
+  float: left;
+  background-color: #0F4C75;
+  font-size: 100%;
+  width: 11%;
+  height: 4vw;
+  margin-right: 2%;
+}
+#botonAcciones, .botonAccion{
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  border-color: #BBE1FA;
+  float: left;
+  background-color: #0F4C75;
+  font-size: 100%;
+  width: 11%;
+  height: 3vw;
+  margin-right: 2%;
+}
+#botonAcciones:hover, .botonAccion:hover{
+   color: white;
+   background-color:#1B262C;
+   font-weight: bold;
+  -webkit-transform:scale(1.1);transform:scale(1.1); /*Acercamiento*/
+}
+#comentario{
+  text-transform:uppercase;
+}
+.btnDetalles:hover, #botonAcciones:hover, #botonAccionEliminar:hover{
+   color: white;
+   background-color:#1B262C;
+   font-weight: bold;
+  -webkit-transform:scale(1.1);transform:scale(1.1); /*Acercamiento*/
+}
+#marcarAnual.btnDetalles{
+  width: 15%;
+}
+
+
+.iconosDetalles{
+  width: auto;
+  height: 5vh;
+  margin-right: 1vw;
+}
+
+.iconosBandejaTomar{
+  width: auto;
+  height: auto;
+}
+
+
+
+
+                  /**EXPEDIENTES/generar-expediente.php**/
+
+
+
+#verExpediente.btn{
+  background-color: #0F4C75;
   color: white;
   border: 2px solid;
   border-radius: 10px;
   width: 100px;
   margin-right: 7px;
 }
-#botonGenerar:hover{
-   color: #148F77;
+#botonGenerar.btn{
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  width: 100px;
+  margin-right: 7px;
+}
+#verExpediente.btn:hover{
+   color: #0F4C75;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+#botonGenerar.btn:hover{
+   color: #0F4C75;
    background-color:white;
   -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
 }
 
 #extracto, #datos, #tipo, #tramite, #delegacion1, #area, #prioridad, #autorizacion1, #autorizacion2{
-  border-color: #0072BC;
+  border: 2px solid #BBE1FA;
+  /*border-width: 5%;*/
 }
 
 .botonBandeja{
@@ -144,21 +317,17 @@ body{
 }
 
 #filaBandeja{
-  background-color: #3A73A8; 
+  background-color: #1B262C; 
   color: white; 
   font-weight: 200;
-  font-family: 'Arial';
-  font-size: 16px;
+  font-size: 100%;
   text-align:center;
-  border-width: 3px;
-  border-color: #53BDEB;
 }
 
 #detalleBandeja{
   text-align: center;
-  font-size: 12px;
-  border-color: #53BDEB;
-  border-width: 3px;
+  font-size: 100%;
+  border: 2px solid #c9d6df;
 }
 
 #detalleBandeja2{
@@ -169,7 +338,7 @@ body{
   text-align: center;
   font-size: 13px;
   color: white;
-  background-color: #E5340E;
+  background-color: #0e84e5;
 }
 
 
@@ -203,4 +372,472 @@ body{
   color: black;
   font-weight: normal;
   font-size: 12px;
+}
+.input.file{
+  width: 100%;
+  border: 2px solid #BBE1FA;
+  /*background-color: #0F4C75;*/
+  border-radius: 1vh;
+  padding: 1%;
+}
+
+
+/**EXPEDIENTES/bandejas-expedientes.php*/
+.botonBandejas{
+  width: 30%;
+  height: 10%;
+  background-color: #0F4C75;
+  margin: 5%;
+  padding: 2%;
+  border-radius: 2vh;
+  color: white;
+  text-decoration: none;
+}
+
+.botonBandejas:hover{
+  border-color: #BBE1FA;
+  color: #BBE1FA; 
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-transform:scale(1.1);transform:scale(1.1);
+}
+
+
+.iconosBandeja{
+  width: 25%;
+  height: 25%;
+  margin-right: 1vw;
+}
+
+
+/*EXPEDIENTES/recibidos.php*/
+
+.fila{
+  background-color: #1B262C;
+  color: white;
+}
+
+/*
+#botonAcciones{
+  background-color:#3A73A8;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  border-color:white;
+  margin: 1px;
+  font-family: 'Arial';
+  font-size: 13px;
+  height: 30px;
+  width: 70px;
+}
+
+#botonAcciones:hover{
+  color: #3A73A8;
+  border-color: #3A73A8;
+  background-color: white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+/*}
+
+/*#verExpediente{
+  margin-right: 3px;
+  margin-left: 3px;
+  background-color: #3282B8;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  font-size: 14px;
+}
+#verExpediente:hover{
+   color: #3282B8;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento
+}*/
+
+
+
+/*EXPEDIENTES/busqueda.php*/
+
+ .subtituloBusqueda{
+  color: #3A73A8;
+  font-size: 110%;
+ }
+ #busqueda{
+    text-transform:uppercase; 
+    text-align: center;
+    width:75%;
+    height:5vh; 
+    border-radius: 2vh; 
+    border-color: #BBE1FA; 
+    margin-right: 1%;
+    color: black;
+    font-size: 100%;
+  }
+
+  #botonBuscar{
+    text-transform:uppercase; 
+    height:5vh; 
+    border-radius: 2vh; 
+    background-color: #3181C3;
+    border-color: black; 
+    color:white;
+    margin-right: 1%;
+    font-size: 100%;
+  }
+  #botonBuscar:hover{
+    background-color: white;
+    border-color: #3181C3;
+    color:#3181C3 !important;
+  }
+
+  #botonLimpiar{ 
+    text-transform:uppercase; 
+    height:5vh; 
+    border-radius: 2vh; 
+    background-color: #1B262C;
+    border-color: black; 
+    color:white;
+    font-size: 100%;
+  }
+  #botonLimpiar:hover {
+    background-color: white;
+    border-color: #1B262C;
+    color:#1B262C !important;
+  }
+
+#filaBusquedaTitulo{
+  background-color: #1B262C;
+  color: white; 
+  font-weight: 200;
+  font-family: 'italic';
+  font-size: 100%;
+  text-align: center;
+}
+
+#filaBusquedaResultado{ 
+  font-family: 'Arial';
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+#botonAccionBusqueda{
+  float:center;
+  width: 90%;
+  margin-right: 5px;
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  font-size: 150%;
+}
+#botonAccionBusqueda:hover{
+   color: white;
+   background-color:#1B262C;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+#filaBusquedaResultado.fechaCreacion{
+  width: 10%;
+  text-align: center;
+}
+
+#filaBusquedaResultado.accion{
+  width: 15%;
+  text-align: center;
+}
+#imagenRecargar{
+  float: right;
+}
+
+.iconosBoton{
+  width: 20%;
+  height: 20%;
+  margin-right: 1vw;
+}
+
+/*EXPEDIENTES/ver-expediente.php*/
+
+.contenedor1{
+border-top: 1px solid #0072BC;
+border-right: 1px solid #0072BC;
+border-bottom: 1px solid #0072BC;
+border-left: 1px solid #0072BC;
+padding: 10px;
+margin-top: 8px;
+}
+
+a{
+  font-size: 13px;
+}
+
+#botonEnviar{
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+}
+#botonEnviar:hover{
+   color: #0F4C75;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+/*#verExpediente{
+  margin-right: 3px;
+  margin-left: 3px;
+  background-color: #148F77;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  font-size: 14px;
+}
+#verExpediente:hover{
+   color: #148F77;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento
+}*/
+
+#verDetalles{
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+}
+#verDetalles:hover{
+   color: #0F4C75;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+h6{
+  font-family: 'italic'; 
+  color: #3A73A8;
+  font-weight: normal;
+}
+span{
+  font-size: 14px;
+}
+
+/*#botonAgregar{
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  margin-left: 5px;
+}
+#botonAgregar:hover{
+   color: #0F4C75;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+
+/*EXPEDIENTES/*/
+
+
+/*#verExpediente{
+  margin-right: 3px;
+  margin-left: 3px;
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 115px;
+}
+#verExpediente:hover{
+   color: #0F4C757;
+   background-color: white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento
+}*/
+
+#filaC{
+  border-color:white;
+  background-color: #0F4C75;
+  color: white;
+
+}
+#detalleC{
+  border-color: #BBE1FA;
+}
+
+.botonArchivo{
+  margin-right: 3px;
+  margin-left: 3px;
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  font-size: 14px;
+  width: 115px;
+}
+.botonArchivo:hover{
+   color: #0F4C75;
+   background-color: white;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+
+#botonAgregar{
+  margin-right: 3px;
+  margin-left: 10px;
+  background-color: white;
+  color: #0F4C75;
+  border: 2px solid;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 90px;
+}
+#botonAgregar:hover{
+   color: white;
+   background-color: #0F4C75;
+  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
+}
+
+/*EXPEDIENTES/ver-historial.php*/
+
+
+#detalleHistorial{
+  /*font-family: 'Verdana';*/
+  /*font-family: 'Georgia', cursive;*/
+  font-family: Arial;
+  color:black;
+  font-size: 100%;
+}
+
+#filaHistorial{
+  background-color: #1B262C; 
+  color: white; 
+  font-weight: 200;
+  /*font-family: 'Georgia', cursive;*/
+  font-family: Arial;
+  font-size: 120%;
+}
+
+#botonVolver{
+  float:center;
+  margin-right: 1%;
+  background-color: #0F4C75;
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  font-size: 100%;
+}
+#botonVolver:hover{
+   color: #0F4C75;
+   background-color:white;
+  -webkit-transform:scale(1);transform:scale(1.1); /*Acercamiento*/
+}
+
+
+/*EXPEDIENTES/tomados.php*/
+
+
+
+/*.btn{
+  color: white;
+  border: 2px solid;
+  border-radius: 2vh;
+  border-color: #BBE1FA;
+  float: left;
+  background-color: #0F4C75;
+  font-size: 100%;
+  width: 13%;
+  height: 4vw;
+  margin-right: 2%;
+}*/
+
+
+/*BECAS/generar-beca.php*/
+
+.subtituloBecas{
+  text-align: left;
+  font-size: 130%;
+  color: #0F4C75;
+  font-weight: bold;
+}
+.cajabeca{
+  padding: 2%;
+}
+.cajabeca.Derecha{
+  float: right;
+  width: 50%;
+  float: inline-end;
+  padding-right: 5%;
+}
+.cajabeca.Izquierda{
+  text-align: ;
+  width: 50%;
+  float: left;
+  padding-left: 5%;
+}
+
+.inputDeBecas{
+  border: 2px solid #BBE1FA;
+  border-radius: 1vh;
+  width: 60%;
+  margin-bottom: 3%;
+  background-color: #EFEFEF;
+}
+.formulario.Beca{
+  padding: 2%;
+}
+.inputDeBecas.Comentarios{
+  width: 70%;
+  height: 10vw;
+  text-align: center;
+  padding: 2%;
+}
+.fijo{
+  display: flow-root;
+
+}
+.botonEnviar.becas{
+  font-size: 150%;
+  width: 10%;
+  height: 5vw;
+  border-radius: 2vh;
+  border: 0.5vh solid #BBE1FA;
+  color: white;
+  background-color: #0F4C75;
+  margin-left: 3%;
+}
+.botonEnviar.becas:hover{
+  background-color: #185ADB;
+  -webkit-transform:scale(1);transform:scale(1.1); /*Acercamiento*/
+}
+.botonEnviarIcono{
+  width: 40%;
+  height: 50%;
+}
+.nombreDelDatoBecas{
+  color: #0F4C75;
+  font-size: 100%;
+}
+
+/*usuarios/usuarioepleado.php*/
+
+.cajaDeTextoDer{
+  display: flexbox;
+  color: #0F4C75;
+  float: right;
+  width: auto;
+
+}
+.cajaDeFoto{
+  width: 50%;
+  position: absolute;
+  padding: 0%;
+  text-align: center;
+  align-content: center;
+}
+
+.cajaDeTextoDer{
+  width: 50%;
+  float: right;
+  position: relative;
+  font-size: 130%;
+}
+.fotoPerfil{
+  width: auto;
+  height: auto;
 }

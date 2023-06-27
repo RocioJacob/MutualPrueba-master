@@ -25,10 +25,10 @@
   #usuario, #clave{
   text-transform:uppercase; 
   border-color: #0F4C75; 
-  border-radius: 25px; 
+  border-radius: 4vh; 
   text-align: center;
   border: 3% solid;
-  margin: 5px;
+  margin: 2%;
   }
   .titulo{
     color: #BBE1FA;
@@ -38,7 +38,7 @@
     font-weight: 600; /*grosor letra*/
   }
   body{
-      background-image: url("../imagenes/fondomutualcolor.png");
+      background-image: url("../imagenes/fondomutualcolor1.png");
   }
 
 .input-group { 
