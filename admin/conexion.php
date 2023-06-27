@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "";
+$password = "MPPNsystemw2022*";
 /*$password = "MPPNsystemw2022*";*/
 $database = "mutualweb";
 

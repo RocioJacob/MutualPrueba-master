@@ -8,14 +8,16 @@ include_once('../estructura/navegacion.php');
   <div id="usuarioGeneral"><?php //echo $usuario?></div>
   
   <!--div class="container"-->
-  <div class="container" id="mycontainer"><br>
+ <div class="container" id="mycontainer">
     <!--h2 style = "font-family: 'Georgia', cursive;">MENÚ</h2-->
-    <span class="subtituloMenu">ACCESOS DIRECTOS</span><br><br>
-
-    <div class="container text-center h-100 d-flex justify-content-center align-items-center">
-      <button class="btn boton" id="boton1" type="submit">GENERAR EXPEDIENTE</button>
-      <button class="btn boton" id="boton2" type="submit">MI BANDEJA</button>
-    </div>  
+    <hr>
+    <h1 class="titulo">ACCESOS DIRECTOS</h1>
+    <hr><br><br>
+    <div id="cajaDeBotones" class="container text-center h-100 d-flex justify-content-center align-items-center">
+      <button class="btn-boton"  id="boton1" type="submit"><img src="../util/imagenes/iconos/expedienteBlanco.png" class="iconos"><p>GENERAR<br>EXPEDIENTE</p></button>
+      <button class="btn-boton" id="boton2" type="submit"><img src="../util/imagenes/iconos/bandejaB.png" class="iconos"><p>MI BANDEJA</p></button>
+      <button class="btn-boton" id="botonEmail" type="submit"><img src="../util/imagenes/iconos/mailB.png" class="iconos"><p>CORREO</p></button>
+    </div>   
 
     <!-- Para computadora -->
       <!--div class="d-none d-sm-none d-md-block"--> 

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../util/css/sweetalert2.min.css">
     <script src="../util/js/sweetalert2@10.js"></script>
     <!--link rel="stylesheet" href="util/css/expedientes.css" type="text/css"-->
-    <link rel="stylesheet" href="../util/css/estilo.css" type="text/css">
+    <link rel="stylesheet" href="../util/css/estiloIS.css" type="text/css">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
     <img id="imagen" src="../util/imagenes/logo-mppn.png">
   </div>
 
-    <p id="tituloPrincipal">SISTEMA MUTUAL POLICIAL</p>
+    <p class="titulo" id="tituloPrincipal">SISTEMA MUTUAL POLICIAL</p>
     <form method="POST" id="formulario">
       
       <div class="input-group mx-auto">
@@ -109,14 +109,3 @@
   }
 </script>
 
-
-<style type="text/css">
-.input-group { 
-  width: 25%;
-}
-@media (max-width: 767px) {
-   .input-group { 
-    width: 50%;
-}
- }
-</style>

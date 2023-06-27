@@ -22,7 +22,9 @@ else{
 
 <body>
   <div class="container-fluid">
-  	<span class="subtituloMenu">DETALLES DEL AFILIADO</span>
+  	<hr>
+  	<h1 class="titulo">DETALLES DEL AFILIADO</h1>
+  	<hr>
   	<?php
   	if($salida == 0){
   		$resultArray = titularCargas($documento);
@@ -31,7 +33,7 @@ else{
     	$longitud = count($arrayCarga);
     ?>	
 
-    	<h5 style = "font-family: 'Arial'; color:#003366; margin-top: 10px;">TITULAR</h5>
+    	<h5 class="subtitulo">TITULAR</h5>
     	<div class="container">
 	        
 	        <div class="row">
@@ -179,7 +181,7 @@ else{
       <?php 
       $salida = tienecargas($arrayTitular['documento']);
       if($salida){ ?>
-        <h5 style = "font-family: 'Arial'; color:#003366; margin-top: 10px;">CARGAS </h5>
+        <h5 class="subtitulo">CARGAS </h5>
         <?php 
         echo $arrayTitular['apellido']." ".$arrayTitular['nombre'];
         ?>
@@ -232,10 +234,3 @@ else{
 </html>
 
 
-
-<style type="text/css">
-.tituloDetalles{
-	color:#003366; 
-	font-size: 17px;
-}
-</style>

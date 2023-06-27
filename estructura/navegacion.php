@@ -12,6 +12,7 @@ else{
   $tipoUsuario = $_SESSION['tipo_usuario'];
   $idAreaUsuario = idAreaUsuario($documento);
 
+
   $usuario1 = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE documento='$documento' and habilitado='0'");
   $usuario1 = mysqli_fetch_assoc($usuario1);
   $buscarExpedientes = $usuario1['permiso_buscar_expedientes']; //Si puede buscar expedientes
@@ -75,71 +76,67 @@ else{
 </head>
 
 
-<div class="container" align="center">
-  <img src="../util/imagenes/cabecera1.png" height="100px" style="margin-top: 15px">
-</div><br>
-
 <header>
   <!--nav class="navbar navbar-expand-lg navbar-dark bg-dark"-->
   <nav class="navbar navbar-expand-lg" id="barraNavegacion">
+  <div class="cajaDeLogo"><img class="imagenLogoBarra" src="../util/imagenes/logo-mppn.png"></div>
   <div class="container-fluid">
 
     <ul class="navbar-nav">
-       
-      <li class="nav-item" style="margin-right: 20px;">
-        <a class="nav-link" href="../principal/menu-principal.php">Inicio</a>
+      
+      <li class="nav-item" >
+        <div class="cajaNavegador"><a class="nav-link" href="../principal/menu-principal.php"><img src="../util/imagenes/iconos/homeBsolido.png" class="iconoNavegador"><br>Inicio</a></div>
       </li>
 
-      <li class="nav-item dropdown" style="margin-right: 20px;">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Afiliados</a>
-        <ul class="dropdown-menu" style="margin-top: 8px;">
+       <li class="nav-item" >
+        <div class="cajaNavegador"><a class="nav-link" href="../expedientes/index.php" role="button"><img src="../util/imagenes/iconos/expedienteBsolido.png" class="iconoNavegador"><br>Expedientes</a></div>
+      </li>
+
+      <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><div class="cajaNavegador"><img src="../util/imagenes/iconos/afiliadosB.png" class="iconoNavegador"></div>Afiliados</a>
+        <ul class="dropdown-menu">
         <?php
         if(estaconectadoAfiliacion()){
         ?>
           <!--li><a class="dropdown-item" href="http://10.8.1.1" target="_blank">Afiliaciones</a></li-->
-          <li><a class="dropdown-item" href="http://192.168.0.5" target="_blank">Afiliaciones</a></li>
+          <li><a class="dropdown-item" href="http://192.168.0.6" target="_blank">Afiliados</a></li>
         <?php
         }
         else{
         ?>
-          <li><a class="dropdown-item" href="../principal/menu-principal.php">Afiliaciones</a></li>
+          <li><a class="dropdown-item" href="../principal/menu-principal.php">Afiliados</a></li>
         <?php
         }
-        ?>
-          <li><a class="dropdown-item" href="">Búsqueda</a></li>
-          <li><a class="dropdown-item" href="">Registrados</a></li>
+        ?>        
+          <li><a class="dropdown-item" href="http://192.168.0.6/afiliacion">Búsqueda</a></li>
+          <li><a class="dropdown-item" href="http://192.168.0.6/afiliacion">Registrados</a></li>
         </ul>
       </li>
-
-      <li class="nav-item" style="margin-right: 20px;">
-        <a class="nav-link" href="../expedientes/index.php" role="button">Expedientes</a>
+     
+      <li class="nav-item" >
+        <div class="cajaNavegador"><a class="nav-link" href="../listados/listados.php"><img src="../util/imagenes/iconos/listaBsolido.png" class="iconoNavegador"><br>Listados</a></div>
       </li>
 
-      <li class="nav-item" style="margin-right: 20px;">
-        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">Listados</a>
+      <li class="nav-item" >
+        <div class="cajaNavegador"><a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"><img src="../util/imagenes/iconos/TurismoViajeroBsolido.png" class="iconoNavegador"><br>Turismo</a></div>
       </li>
 
-      <li class="nav-item" style="margin-right: 20px;">
-        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">Turismo</a>
+      <li class="nav-item" >
+        <div class="cajaNavegador"><a class="nav-link" href="../becas/index.php" role="button"><img src="../util/imagenes/iconos/BecasGorroBlanco.png" class="iconoNavegador"><br>Becas</a></div>
       </li>
-
-      <li class="nav-item" style="margin-right: 20px;">
-        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">Becas</a>
-      </li>
-
-      <li class="nav-item dropdown" style="margin-right: 20px;">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Mi perfil</a>
-        <ul class="dropdown-menu" style="margin-top: 8px;">
-          <li><a class="dropdown-item" href="">Mis datos</a></li>
-          <li><a class="dropdown-item" href="">Cambiar clave</a></li>
+ <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><div class="cajaNavegador"><img src="../util/imagenes/iconos/cuentaB.png" class="iconoNavegador"></div>Mi perfil</a>
+        <ul class="dropdown-menu">        
+          <li><a class="dropdown-item" href="../usuarios/usuarioempleado.php">Mis datos</a></li>
+          <!--li><a class="dropdown-item" href="">Cambiar clave</a></li-->
         </ul>
       </li>
 
     </ul>
-
-    <ul class="nav navbar-nav navbar-right">
-      <span id="nombreUsuario" style="margin-top: 9px; margin-right: 10px; color: white"><?php echo "Usuario: ".$usuario?></span>
-      <a href="" class="btn" id="salir" title="Salir">Salir</a>
+    <br>
+    <ul id="usuarioySalir" class="nav navbar-nav navbar-right">
+      <div><span id="nombreUsuario" class="nombreUsuario"><?php echo "Usuario: ".$usuario?></span>
+      <a href="" class="btn" id="salir" title="Salir"><img src="../util/imagenes/iconos/salirB.png" class="iconoSalir">Salir</a></div>
     </ul>
 
   </div>
@@ -153,13 +150,13 @@ else{
 $('#salir').click(function(evento){
   evento.preventDefault();
   Swal.fire({
-    title: '<span style="font-size: 22px;">¿Desea cerrar su sesion?</span>',
-    width:'500px',
+    title: '¿Desea cerrar su sesión?',
+    width:'550px',
     showCancelButton: true,
     confirmButtonText: 'Aceptar',
-    confirmButtonColor: '#148F77',
+    confirmButtonColor: '#0F4C75',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
    }).then((result) => {  
     if (result.isConfirmed) {
@@ -199,7 +196,7 @@ function mensajeErrorSesion($mensaje){
     icon: 'error',
     width:'500px',
     allowOutsideClick: false,
-    confirmButtonColor: '#03989e',
+    confirmButtonColor: '#0F4C75',
   });
 }
 
@@ -216,36 +213,3 @@ function mensajeExitoSesion($mensaje){
   });
 }
 </script>
-
-<style type="text/css">
-.nav-link{
-  color: white;
-}
-
-.dropdown-item:hover{
-  background-color: #0072bc !important;
-  color: white !important;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.dropdown-toggle:hover, .nav-link:hover{
-  color: #A4A2A2 !important;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-#salir{
-  text-decoration:none;
-  color: white;
-  background-color: red;
-  font-size: 18px;
-  font-family: Georgia;
-  margin-right: 1px; 
-  float:right;
-}
-
-#salir:hover{
-   color: red;
-   background-color:white;
-}
-</style>
