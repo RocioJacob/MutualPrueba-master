@@ -256,7 +256,7 @@ function marcar(valor){
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#03989e',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -293,7 +293,7 @@ function desmarcar(valor){
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#03989e',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -416,117 +416,3 @@ return true;
 };
 </script>
 
-
-<style type="text/css">
-
-
-#botonGeneral{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 13px;
-  width: 135px;
-}
-#botonGeneral:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-  #botonAcciones{
-  background-color:#3A73A8;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAcciones:hover{
-  color: #3A73A8;
-  border-color: #3A73A8;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#verExpediente{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-  width: 115px;
-}
-#verExpediente:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#filaC{
-  border-color:white;
-  background-color: #148F77;
-  color: white;
-
-}
-#detalleC{
-  border-color: #148F77;
-}
-
-.botonArchivo{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-  width: 115px;
-}
-.botonArchivo:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-
-#botonAgregar{
-  margin-right: 3px;
-  margin-left: 10px;
-  background-color: white;
-  color: #148F77;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-  width: 90px;
-}
-#botonAgregar:hover{
-   color: white;
-   background-color: #148F77;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#botonGeneral{
-  margin-right: 3px;
-  margin-left: 3px;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  float: left;
-  background-color: #148F77;
-  font-size: 13px;
-}
-#botonGeneral:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-</style>

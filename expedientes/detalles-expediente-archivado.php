@@ -151,7 +151,7 @@ function marcarAnual(valor, identificador){
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#03989e',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -188,7 +188,7 @@ function desmarcarAnual(valor, identificador){
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#03989e',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -251,9 +251,9 @@ function eliminarArchivoArchivadoNuevo(idExpediente, anio, idUsuario, link, idAr
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -319,9 +319,9 @@ function eliminarArchivoArchivadoViejo(archivo, nombreArchivo, idExpediente, ani
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -379,125 +379,3 @@ function mensajeExitoEliminarArchivadoViejo(mensaje, expediente){
 
 
 
-
-<style type="text/css">
-.caja { 
-  border-top: 1px solid #0072BC;
-  border-right: 1px solid #0072BC;
-  border-bottom: 1px solid #0072BC;
-  border-left: 1px solid #0072BC;
-  padding: 5px;
-}
-
-.subtituloArchivos{
-  font-family: Arial;
-  text-align: left;
-  font-size: 20px;
-}
-
-
-.btnDetalles{
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  float: left;
-  background-color: #148F77;
-  font-size: 13px;
-  width: 120px;
-  height: 40px;
-  margin-right: 10px;
-}
-
-.btnDetalles:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#botonAcciones{
-  background-color:#3A73A8;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAcciones:hover{
-  color: #3A73A8;
-  border-color: #3A73A8;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#botonAccionesEliminar1{
-  background-color:red;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAccionesEliminar1:hover{
-  color: red;
-  border-color: red;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#botonAccionesEliminar2{
-  background-color:red;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-  opacity: 0.5; /* Reduce la opacidad del botón */
-  pointer-events: none; /* Evita que el botón sea interactivo */
-  cursor: not-allowed; /* Cambia el cursor a "no permitido" */
-}
-
-.subtituloDetalles1{
-  font-family: Arial;
-  color: #3A73A8;
-  font-weight: normal;
-  font-size: 13px;
-}
-
-.subtituloDetalles2{
-  font-family: Arial;
-  color: black;
-  font-weight: normal;
-  font-size: 12px;
-}
-
-
-#botonVerExpediente, #botonVerHistorial, #botonDesarchivar, #botonAgregar, #botonAnual{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-  width: 115px;
-}
-#botonVerExpediente:hover, #botonVerHistorial:hover, #botonDesarchivar:hover, #botonAgregar:hover, #botonAnual:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-</style>

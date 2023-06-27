@@ -15,7 +15,7 @@ if(isset($_POST["usuario"])){
 		//$resultado = mysqli_fetch_array($sql);
 		$totalExpedientes = $result->num_rows;
 		echo '<br>';
-		echo '<p style="color:#3A73A8">EXPEDIENTES: '.$totalExpedientes.'</p>';
+		echo '<p class="subtituloBuqueda">EXPEDIENTES: '.$totalExpedientes.'</p>';
 
 		$tabla.= '<table class="table table-bordered table-striped">
 				<thread>
@@ -70,7 +70,7 @@ if(isset($_POST["usuario"])){
 	}
 	else{
 		echo '<br>';
-		$tabla.='<h3 style="color:#3A73A8">'."NO SE ENCONTRARON RESULTADOS".'<h3>';
+		$tabla.='<h3 class="subtituloBuqueda">'."NO SE ENCONTRARON RESULTADOS".'<h3>';
 	}
    echo $tabla;
    echo "<br>";
@@ -78,38 +78,6 @@ if(isset($_POST["usuario"])){
 ?>
 
 
-<style type="text/css">
-
-#filaBusquedaTitulo{
-  /*background-color: #3A73A8;*/
-  background-color: #5F5858;
-  color: white; 
-  font-weight: 200;
-  font-family: 'italic';
-  font-size: 18px;
-  text-align: center;
-}
-
-#filaBusquedaResultado{ 
-  font-family: 'Arial';
-  font-size: 12px;
-}
-
-#botonAccionBusqueda{
-  float:center;
-  margin-right: 5px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-}
-#botonAccionBusqueda:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-</style>
     
 
 

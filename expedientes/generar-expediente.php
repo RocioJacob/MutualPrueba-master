@@ -4,11 +4,13 @@ include('../estructura/navegacion.php');
 
 <body>
 <div class="container-fluid">
-  <span class="subtituloMenu">GENERAR EXPEDIENTE</span><br>
+  <hr>
+  <h1 class="titulo">GENERAR EXPEDIENTE</h1>
+  <hr>
   <?php 
     if(estaConectado()){
   ?>
-    <span style="color: red;">Con conexión a la VPN</span>
+    <span style="color: #3A73A8;">Con conexión a la VPN</span>
   <?php
     }else{
   ?>
@@ -22,7 +24,7 @@ include('../estructura/navegacion.php');
     <div class="form-row">
 
       <div class="form-group col-md-4">
-        <label id="tituloFormulario">* Tipo</label>
+        <label class="subtitulo" id="tituloFormulario">* Tipo</label>
         <select id="tipo" name="tipo" class="form-control">
           <option value="">Seleccione un tipo</option>
           <option value="AFILIADO">AFILIADO</option>
@@ -39,7 +41,7 @@ include('../estructura/navegacion.php');
       <div class="form-group col-md-4"></div>
 
       <div class="form-group col-md-4" style="display:none" id="delega1">
-          <label id="tituloFormulario">* Delegacion</label>
+          <label class="subtitulo" id="tituloFormulario">* Delegacion</label>
           <select id="delegacion1" name="delegacion1" class="form-control">
             <option value="">Seleccione una delegación</option>
             <option value="ALUMINE">ALUMINE</option>
@@ -61,7 +63,7 @@ include('../estructura/navegacion.php');
         </div>
 
         <div class="form-group col-md-4">
-          <label id="tituloFormulario">* Tramite</label>
+          <label class="subtitulo" id="tituloFormulario">* Tramite</label>
           <select id="tramite" name="tramite" class="form-control">
             <option value="">Seleccione un tramite</option>
             <?php
@@ -79,7 +81,7 @@ include('../estructura/navegacion.php');
         <?php echo $fila['autorizacion'];?>
 
         <div class="form-group col-md-4" id="autorizado1" style="display:none">
-          <label id="tituloFormulario">* Autorizado por</label>
+          <label class="subtitulo" id="tituloFormulario">* Autorizado por</label>
           <select id="autorizacion1" name="autorizacion1" class="form-control">
             <option value="">Seleccione una opción</option>
             <?php 
@@ -98,24 +100,24 @@ include('../estructura/navegacion.php');
         </div>
 
         <div class="form-group col-md-4" id="autorizado2" style="display:none">
-          <label id="tituloFormulario">* Autorizado por</label>
+          <label class="subtitulo" id="tituloFormulario">* Autorizado por</label>
           <select id="autorizacion2" name="autorizacion2" class="form-control">
             <option value="NO">NO REQUIERE</option>
           </select>
         </div>
 
         <div class="form-group col-md-12">
-          <label id="tituloFormulario">Descripción</label><br>
+          <label class="subtitulo" id="tituloFormulario">Descripción</label><br>
           <textarea class="form-control" id="datos" name="datos" rows="4" autocomplete="off" maxlength="150" style="resize: none"></textarea>
         </div>
 
         <div class="form-group col-md-12">
-          <label id="tituloFormulario">Extracto</label><br>
+          <label class="subtitulo" id="tituloFormulario">Extracto</label><br>
           <textarea class="form-control" id="extracto" name="extracto" rows="4" autocomplete="off" placeholder="Maximo 400 caracteres" maxlength="400" style="resize: none"></textarea>
         </div>
 
         <div class="form-group col-md-4">
-          <label id="tituloFormulario">* Enviar a</label>
+          <label class="subtitulo" id="tituloFormulario">* Enviar a</label>
             <select id="area" name="area" class="form-control">
               <option value="">Seleccione un área</option>
             <?php
@@ -132,7 +134,7 @@ include('../estructura/navegacion.php');
         </div>
         
         <div class="form-group col-md-4">
-          <label id="tituloFormulario">Prioridad</label>
+          <label class="subtitulo" id="tituloFormulario">Prioridad</label>
           <select id="prioridad" name="prioridad" class="form-control">
             <option value="NORMAL">NORMAL</option>
             <option value="ALTA">ALTA</option>
@@ -140,7 +142,7 @@ include('../estructura/navegacion.php');
         </div>
 
         <div class="form-group col-md-12">
-          <label id="tituloFormulario">Adjuntar archivos</label><br>
+          <label class="subtitulo" id="tituloFormulario">Adjuntar archivos</label><br>
             <input multiple="true" name="archivo[]" id="file" type="file"><br>
           <label>Formatos aceptados: PDF, PNG, JPG y JPEG.<br>Adjuntar seleccionando todos los archivos de una vez o presionando la tecla CTRL y seleccionando de a uno.</label><br>
         </div>
@@ -308,9 +310,9 @@ $('#botonGenerar').click(function(evento){
           width:'500px',
           showCancelButton: true,
           confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#148F77',
+          confirmButtonColor: '#0F4C75',
           confirmButtonText: 'Aceptar',
-          cancelButtonColor: 'red',
+          cancelButtonColor: '#1B262C',
           allowOutsideClick: false,
       }).then((result) => {
         
@@ -509,9 +511,6 @@ function validarFormulario(){
   max-width: 1300px !important; 
 }
 
-hr{
-  background-color: #1C5D88;
-}
   
 #loader {
   position: fixed;

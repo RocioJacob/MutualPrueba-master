@@ -49,9 +49,9 @@
           width:'500px',
           showCancelButton: true,
           confirmButtonText: 'Aceptar',
-          confirmButtonColor: '#148F77',
+          confirmButtonColor: '#0F4C75',
           confirmButtonText: 'Aceptar',
-          cancelButtonColor: 'red',
+          cancelButtonColor: '#1B262C',
           allowOutsideClick: false,
       }).then((result) => {
         

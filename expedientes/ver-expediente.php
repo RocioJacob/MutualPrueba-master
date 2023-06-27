@@ -293,9 +293,9 @@ function devolverComentarios($id){
         width:'600px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -354,9 +354,9 @@ function devolverComentarios($id){
             width:'600px',
             showCancelButton: true,
             confirmButtonText: 'Aceptar',
-            confirmButtonColor: '#148F77',
+            confirmButtonColor: '#0F4C75',
             confirmButtonText: 'Aceptar',
-            cancelButtonColor: 'red',
+            cancelButtonColor: '#1B262C',
             allowOutsideClick: false,
       }).then((result) => {
           
@@ -466,7 +466,7 @@ function marcar(valor){
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#03989e',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -503,7 +503,7 @@ function desmarcar(valor){
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#03989e',
     confirmButtonText: 'Aceptar',
-    cancelButtonColor: 'red',
+    cancelButtonColor: '#1B262C',
     allowOutsideClick: false,
   }).then((result) => {
       if (result.isConfirmed) {
@@ -545,98 +545,3 @@ function mensajeExito2($mensaje){
   }
 </script>
 
-<style type="text/css">
-
-.contenedor1{
-border-top: 1px solid #0072BC;
-border-right: 1px solid #0072BC;
-border-bottom: 1px solid #0072BC;
-border-left: 1px solid #0072BC;
-padding: 10px;
-margin-top: 8px;
-}
-
-a{
-  font-size: 13px;
-}
-
-#botonEnviar{
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-}
-#botonEnviar:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#verExpediente{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-}
-#verExpediente:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#verDetalles{
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-}
-#verDetalles:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-h6{
-  font-family: 'italic'; 
-  color: #3A73A8;
-  font-weight: normal;
-}
-span{
-  font-size: 14px;
-}
-
-#botonAgregar{
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  margin-left: 5px;
-}
-#botonAgregar:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#botonGeneral{
-  margin-right: 3px;
-  margin-left: 3px;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  float: left;
-  background-color: #148F77;
-  font-size: 13px;
-}
-#botonGeneral:hover{
-   color: #148F77;
-   background-color:white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-</style>
-
-
-   

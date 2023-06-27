@@ -4,8 +4,9 @@ include('../estructura/navegacion.php');
 
 <body>
   <div class="container-fluid">
-    <span class="subtituloMenu">BÚSQUEDA DE EXPEDIENTES</span><br>
-    <span style="color: red; font-size: 15px;">No archivados y no ocultos</span><br><br>
+  	<hr>
+    <h1 class="titulo">BÚSQUEDA DE EXPEDIENTES</h1><hr><br>
+ 
      <input type="text" name="busqueda" id="busqueda" placeholder=" Ingresar ID o tipo o tramite o documento o cuit o código" maxlength="15" autocomplete="off"><br><br>
 	
 	<section id="tabla_resultado"><!-- AQUI SE DESPLEGARA NUESTRA TABLA DE CONSULTA --></section>
@@ -40,19 +41,6 @@ $(document).on('keyup', '#busqueda', function(){
 });
 
 </script>
-
-
-<style type="text/css">
-#busqueda{
-  text-transform:uppercase; 
-  width:530px;
-  height:40px; 
-  border-radius: 10px; 
-  border-color: black;
-  font-size: 14px;
-}
-</style>
-
 
 
    

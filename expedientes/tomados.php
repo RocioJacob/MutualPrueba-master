@@ -11,12 +11,11 @@ include('modalEnviar2.php');
 
 <body>
   <div class="container-fluid">
-  <span class="subtituloMenu">BANDEJAS</span>
     <?php
     include('bandejas.php');
     ?>
     <div>
-      <span id="subtituloBandejas">EXPEDIENTES TOMADOS </span>
+      <h1 class="titulo">EXPEDIENTES TOMADOS </h1>
       <img id="imagenRecargar" title="comentario" src="../util/imagenes/recargar.png" width="35" height="35" onclick="recargar();">
       
       <table class="table table-bordered">
@@ -85,18 +84,20 @@ include('modalEnviar2.php');
                 }
                 
               ?>
-              <a href="expedientePdf.php?idExpediente=<?php echo $idExpediente;?>&anio=<?php echo $anio;?>" class="btn" id="verExpediente" title="Ver expediente" target="_blank">Carátula</a>
+              <br>
+              <a href="expedientePdf.php?idExpediente=<?php echo $idExpediente;?>&anio=<?php echo $anio;?>" title="Ver expediente" target="_blank"><button class="btnDetalles" id="verExpediente"  type="submit" title="Ver caratula"><img src="../util/imagenes/iconos/caratulaB.png" class="iconosDetalles">Carátula</button></a>
 
 <!------------------------------------------------------------------------------------------------------->
               <?php //AGREGAR ARCHIVO
               //Tiene permiso de agregar archivo
               if($agregarArchivo=="0"){
               ?> 
-                <a href="#" class="agregarArchivo" data-toggle="modal" data-target="#myModalAgregar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonAgregar" type="button" title="Agregar archivos">Agregar</button></a>
+
+                <a href="#" class="agregarArchivo" data-toggle="modal" data-target="#myModalAgregar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="" type="button" title="Agregar archivos"><img src="../util/imagenes/iconos/agregarArchivoB.png" class="iconosDetalles">Agregar</button></a>
               <?php
               }else{
               ?>
-                <a href="#" class="agregarArchivo" data-toggle="modal" data-target="#myModalAgregar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonAgregar" type="button" title="Agregar archivos" disabled>Agregar</button></a>
+                <a href="#" class="agregarArchivo" data-toggle="modal" data-target="#myModalAgregar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="" type="button" title="Agregar archivos" disabled><img src="../util/imagenes/iconos/agregarArchivoB.png" class="iconosDetalles">Agregar</button></a>
               <?php
               }
               ?>
@@ -107,11 +108,11 @@ include('modalEnviar2.php');
               if(!estaOculto($row["id"])){
                 if($archivarExpediente == "0"){ 
               ?>
-                  <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonArchivar" type="button" title="Archivar">Archivar</button></a>
+                  <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="botonArchivar" type="button" title="Archivar"><img src="../util/imagenes/iconos/archivarB.png" class="iconosDetalles">Archivar</button></a>
               <?php 
               }else{
               ?> 
-                  <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonArchivar" type="button" title="Archivar" disabled>Archivar</button></a>
+                  <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonArchivar" type="button" title="Archivar" disabled><img src="../util/imagenes/iconos/archivarB.png" class="iconosDetalles">Archivar</button></a>
               <?php
                 }
               }//Si expediente esta oculto
@@ -119,12 +120,12 @@ include('modalEnviar2.php');
                 //SI usuario puede archivar oculto
                 if($archivarOculto == "0"){ 
                 ?>
-                    <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonArchivar" type="button" title="Archivar">Archivar Oculto</button></a>
+                    <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="botonArchivar" type="button" title="Archivar"><img src="../util/imagenes/iconos/ocultoBlanco.png" class="iconosDetalles">Archivar Oculto</button></a>
                 <?php 
                 }//SI usuario NOpuede archivar oculto
                 else{
                 ?> 
-                    <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonArchivar" type="button" title="Archivar" disabled>Archivar Oculto</button></a>
+                    <a href="#" class="archivarExpediente" data-toggle="modal" data-target="#myModalArchivar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="botonArchivar" type="button" title="Archivar" disabled><img src="../util/imagenes/iconos/ocultoBlanco.png" class="iconosDetalles">Archivar Oculto</button></a>
                 <?php
                 }
               }
@@ -135,7 +136,7 @@ include('modalEnviar2.php');
             if(!expedienteConAutorizacion($idExpediente)){
             ?>
               <a href="#" class="enviarArchivo2" data-toggle="modal" data-target="#myModalEnviar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none">
-                <button class="btn" id="botonEnviar" type="button" title="Enviar archivos">Enviar</button></a>
+                <button class="btnDetalles" id="" type="button" title="Enviar archivos"><img src="../util/imagenes/iconos/sendB.png" class="iconosDetalles">Enviar</button></a>
             <?php
             }
             //Si es un expediente que SI necesita autorizacion
@@ -145,7 +146,7 @@ include('modalEnviar2.php');
                 //Esta autorizado el expediente o esta rechazado
                 if(($estadoAutorizacion == "0")or($estadoAutorizacion == "1")){ 
             ?>
-                  <a href="#" class="enviarArchivo2" data-toggle="modal" data-target="#myModalEnviar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonEnviar" type="button" title="Enviar archivos">Enviar</button></a>
+                  <a href="#" class="enviarArchivo2" data-toggle="modal" data-target="#myModalEnviar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="" type="button" title="Enviar archivos"><img src="../util/imagenes/iconos/sendB.png" class="iconosDetalles">Enviar</button></a>
                 
                 <?php
                 }
@@ -155,13 +156,13 @@ include('modalEnviar2.php');
                   //Usuario SI puede autorizar
                   if($autorizarExpediente == "0"){ 
                 ?>
-                    <a href="#" class="enviarArchivo1" data-toggle="modal" data-target="#myModalEnviar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btn" id="botonEnviar" type="button" title="Enviar archivos">Enviar</button></a>
+                    <a href="#" class="enviarArchivo1" data-toggle="modal" data-target="#myModalEnviar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none"><button class="btnDetalles" id="" type="button" title="Enviar archivos"><img src="../util/imagenes/iconos/sendB.png" class="iconosDetalles">Enviar</button></a>
                   <?php
                   }//Usuario NO puede autorizar
                   else{ 
                   ?>
                     <a href="#" class="enviarArchivo2" data-toggle="modal" data-target="#myModalEnviar" data-idexpediente="<?php echo $row["id"] ?>" data-identificador="<?php echo $row["identificador"] ?>" style="text-decoration: none">
-                      <button class="btn" id="botonEnviar" type="button" title="Enviar archivos">Enviar</button></a>
+                      <button class="btnDetalles" id="" type="button" title="Enviar archivos"><img src="../util/imagenes/iconos/sendB.png" class="iconosDetalles">Enviar</button></a>
                   <?php  
                   }
                 }
@@ -173,22 +174,22 @@ include('modalEnviar2.php');
             if($expediente['es_anual'] == "1"){
               if($marcarAnual == "0"){
             ?>
-                <button class="btn" id="botonGeneral" type="submit" title="Marcar anual" onclick="marcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')">Marcar Anual</button>
+                <button class="btnDetalles" id="botonGeneral" type="submit" title="Marcar anual" onclick="marcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')"><img src="../util/imagenes/iconos/marcarAnualB.png" class="iconosDetalles">Marcar Anual</button>
               <?php 
               }else{
               ?>
-                <button class="btn" id="botonGeneral" type="submit" title="Marcar anual" onclick="marcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled>Marcar Anual</button>
+                <button class="btnDetalles" id="botonGeneral" type="submit" title="Marcar anual" onclick="marcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled><img src="../util/imagenes/iconos/marcarAnualB.png" class="iconosDetalles">Marcar Anual</button>
             <?php
               }
             }
             else{ 
               if($desmarcarAnual == "0"){
             ?>
-                <button class="btn" id="botonGeneral" type="submit" title="Desmarcar anual" onclick="desmarcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')">Desmarcar Anual</button>
+                <button class="btnDetalles" id="botonGeneral" type="submit" title="Desmarcar anual" onclick="desmarcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')"><img src="../util/imagenes/iconos/marcarAnualB.png" class="iconosDetalles">Desmarcar Anual</button>
               <?php 
               }else{
               ?>
-                <button class="btn" id="botonGeneral" type="submit" title="Desmarcar anual" onclick="desmarcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled>Desmarcar Anual</button>
+                <button class="btnDetalles" id="botonGeneral" type="submit" title="Desmarcar anual" onclick="desmarcar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled><img src="../util/imagenes/iconos/marcarAnualB.png" class="iconosDetalles">Desmarcar Anual</button>
             <?php  
               }
             }
@@ -200,12 +201,12 @@ include('modalEnviar2.php');
                 //Usuario puede ocultar expediente
                 if($ocultarExpediente == '0'){ 
               ?>
-                  <button class="btn" id="botonGeneral" type="submit" title="Ocultar" onclick="ocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')">Ocultar</button>
+                  <button class="btnDetalles" id="botonGeneral" type="submit" title="Ocultar" onclick="ocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')"><img src="../util/imagenes/iconos/ocultoBlanco.png" class="iconosDetalles">Ocultar</button>
                 <?php
                 }
                 else{
                 ?>
-                  <button class="btn" id="botonGeneral" type="submit" title="Ocultar" onclick="ocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled>Ocultar</button>
+                  <button class="btnDetalles" id="botonGeneral" type="submit" title="Ocultar" onclick="ocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled><img src="../util/imagenes/iconos/ocultoBlanco.png" class="iconosDetalles">Ocultar</button>
                 <?php
                 }
               }
@@ -213,12 +214,12 @@ include('modalEnviar2.php');
                   //Usuario puede desocultar expediente
                   if($desocultarExpediente == '0'){ 
               ?>
-                    <button class="btn" id="botonGeneral" type="submit" title="Mostrar" onclick="desocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')">Desocultar</button>
+                    <button class="btnDetalles" id="botonGeneral" type="submit" title="Mostrar" onclick="desocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')"><img src="../util/imagenes/iconos/DesocultoB.png" class="iconosDetalles">Desocultar</button>
                   <?php
                   }
                   else{//Usuario NO puede desocultar expediente
                   ?>
-                    <button class="btn" id="botonGeneral" type="submit" title="Mostrar" onclick="desocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled>Desocultar</button>
+                    <button class="btnDetalles" id="botonGeneral" type="submit" title="Mostrar" onclick="desocultar('<?php echo $expediente['id']?>', '<?php echo $row['identificador'] ?>')" disabled><img src="../util/imagenes/iconos/DesocultoB.png" class="iconosDetalles">Desocultar</button>
                   <?php
                   }
               }
@@ -229,7 +230,7 @@ include('modalEnviar2.php');
     <?php
     if($expediente['documento']!="0"){
     ?>
-      <a href="../afiliados/detalles-afiliado.php?id=<?php echo $expediente['documento'];?>" class="btn" id="botonGeneral" title="Cuenta corriente" target="_blank">Cuenta corriente</a>
+      <a href="../afiliados/detalles-afiliado.php?id=<?php echo $expediente['documento'];?>" class="" id="botonGeneral" title="Cuenta corriente" target="_blank"><button class="btnDetalles" id="verExpediente"  type="submit" title="Ver caratula"><img src="../util/imagenes/iconos/ctacorrienteB.png" class="iconosDetalles">Cuenta cte</button></a>
 
     <?php
     }
@@ -238,6 +239,7 @@ include('modalEnviar2.php');
           <?php
             echo '<br>'; echo '<br>'; echo '<br>';
               if(tieneComentarios($idExpediente, $anio)){ 
+                echo'<br>';
                 devolverComentarios($idExpediente, $anio); 
               } 
             ?>
@@ -328,9 +330,9 @@ include('modalEnviar2.php');
       width:'500px',
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
       confirmButtonText: 'Aceptar',
-      cancelButtonColor: 'red',
+      cancelButtonColor: '#1B262C',
       allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
@@ -365,9 +367,9 @@ include('modalEnviar2.php');
       width:'500px',
       showCancelButton: true,
       confirmButtonText: 'Aceptar',
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
       confirmButtonText: 'Aceptar',
-      cancelButtonColor: 'red',
+      cancelButtonColor: '#1B262C',
       allowOutsideClick: false,
     }).then((result) => {
       if (result.isConfirmed) {
@@ -401,7 +403,7 @@ include('modalEnviar2.php');
       icon: 'error',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     });
   }
 
@@ -412,7 +414,7 @@ include('modalEnviar2.php');
       icon: 'success',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     }).then(function(){
           window.location.replace("tomados.php");
     });
@@ -426,7 +428,7 @@ include('modalEnviar2.php');
       icon: 'error',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     });
   }
 
@@ -450,9 +452,9 @@ include('modalEnviar2.php');
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -489,9 +491,9 @@ include('modalEnviar2.php');
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -527,7 +529,7 @@ include('modalEnviar2.php');
       icon: 'error',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     });
   }
 
@@ -538,7 +540,7 @@ include('modalEnviar2.php');
       icon: 'success',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     }).then(function(){
           window.location.replace("tomados.php");
     });
@@ -558,9 +560,9 @@ include('modalEnviar2.php');
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -595,7 +597,7 @@ function mensajeExitoEliminarViejo($mensaje){
     icon: 'error',
     width:'500px',
     allowOutsideClick: false,
-    confirmButtonColor: '#03989e',
+    confirmButtonColor: '#0F4C75',
   });
 }
 
@@ -606,7 +608,7 @@ function mensajeExitoEliminarViejo($mensaje){
     title: 'Exito',
     text: $mensaje, 
     allowOutsideClick: false,
-    confirmButtonColor: '#03989e',
+    confirmButtonColor: '#0F4C75',
     }).then(function(){
       //window.open("");
       window.location.replace("tomados.php");
@@ -624,9 +626,9 @@ function eliminarArchivoNuevo(idExpediente, anio, idUsuario, link, idArchivo){
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -661,7 +663,7 @@ function mensajeErrorEliminarNuevo($mensaje){
     icon: 'error',
     width:'500px',
     allowOutsideClick: false,
-    confirmButtonColor: '#03989e',
+    confirmButtonColor: '#0F4C75',
   });
 }
 
@@ -672,7 +674,7 @@ function mensajeExitoEliminarNuevo($mensaje){
     title: 'Exito',
     text: $mensaje, 
     allowOutsideClick: false,
-    confirmButtonColor: '#03989e',
+    confirmButtonColor: '#0F4C75',
     }).then(function(){
       //window.open("");
       window.location.replace("tomados.php");
@@ -689,7 +691,7 @@ function mensajeErrorArchivo($mensaje){
       icon: 'error',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     });
   }
 
@@ -700,113 +702,10 @@ function mensajeErrorArchivo($mensaje){
       icon: 'success',
       width:'500px',
       allowOutsideClick: false,
-      confirmButtonColor: '#03989e',
+      confirmButtonColor: '#0F4C75',
     }).then(function(){
           window.location.replace("tomados.php");
     });
   }
 </script>
 
-
-<style type="text/css">
-#botonGeneral{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 13px;
-  width: 135px;
-}
-
-#botonGeneral:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#verExpediente, #botonAgregar, #botonEnviar, #botonArchivar{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 13px;
-  width: 120px;
-}
-#verExpediente:hover, #botonAgregar:hover, #botonEnviar:hover, #botonArchivar:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#filaC{
-  border-color:white;
-  background-color: #148F77;
-  color: white;
-
-}
-#detalleC{
-  border-color: #148F77;
-}
-
-#botonAcciones{
-  background-color:#3A73A8;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAcciones:hover{
-  color: #3A73A8;
-  border-color: #3A73A8;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-
-#botonAccionesEliminar1{
-  background-color:red;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAccionesEliminar1:hover{
-  color: red;
-  border-color: red;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#botonAccionesEliminar2{
-  background-color:red;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-  opacity: 0.5; /* Reduce la opacidad del botón */
-  pointer-events: none; /* Evita que el botón sea interactivo */
-  cursor: not-allowed; /* Cambia el cursor a "no permitido" */
-}
-
-</style>

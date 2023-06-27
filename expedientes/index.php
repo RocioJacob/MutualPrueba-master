@@ -4,8 +4,11 @@
 include('../estructura/navegacion.php');
 ?>
 <body>
-<div class="container" id="mycontainer"><br>
-  <span class="subtituloMenu">EXPEDIENTES</span><br><br>
+<div class="container" id="mycontainer">
+  <hr>
+  <h3 class="titulo">EXPEDIENTES</h3>
+  <hr>
+
 
 <!-- Para computadora -->
   <!--div class="d-none d-sm-none d-md-block"><br/-->
@@ -14,18 +17,18 @@ include('../estructura/navegacion.php');
         
         <?php 
         if($generarExpediente == '0'){ ?>
-          <button class="btn boton" id="boton1" type="submit">GENERAR EXPEDIENTE</button>
+          <button class="btn-boton" id="boton1" type="submit"><img src="../util/imagenes/iconos/expedienteBlanco.png" class="iconos"><p>GENERAR<br>EXPEDIENTE</p></button>
         <?php 
         } 
         ?>
         
-        <button class="btn boton" id="boton3" type="submit">MIS BANDEJAS</button>
+        <button class="btn-boton" id="boton3" type="submit"><img src="../util/imagenes/iconos/bandejaB.png" class="iconos"><p>BANDEJAS</p></button>
 
         <?php
         if($buscarExpedientes == "0"){
         ?>
-          <button class="btn boton" id="boton5" type="submit">BUSQUEDA 1</button>
-          <button class="btn boton" id="boton6" type="submit">BUSQUEDA 2</button>
+          <button class="btn-boton" id="boton5" type="submit"><img src="../util/imagenes/iconos/BuscarExpedienteB.png" class="iconos"><p>BUSCAR<br>EXPEDIENTE1</p></button>
+          <button class="btn-boton" id="boton6" type="submit"><img src="../util/imagenes/iconos/BuscarExpedienteB.png" class="iconos"><p>BUSCAR<br>EXPEDIENTE2</p></button>
         <?php
         }
         ?>
@@ -33,7 +36,7 @@ include('../estructura/navegacion.php');
         <?php
         if($trabajarConArchivados == "0"){
         ?>
-          <button class="btn boton" id="boton7" type="submit">ARCHIVADOS</button>
+          <button class="btn-boton" id="boton7" type="submit"><img src="../util/imagenes/iconos/archivarB.png" class="iconos"><p>ARCHIVADOS</p></button>
         <?php
         }
         ?>
@@ -44,7 +47,7 @@ include('../estructura/navegacion.php');
         <?php
         if($trabajarConExpedientes2020 == "0"){
         ?>
-          <button class="btn boton" id="boton" type="submit">EXPEDIENTES<br>2020</button>
+          <button class="btn-boton" id="boton" type="submit"><img src="../util/imagenes/iconos/expedienteBlanco.png" class="iconos"><p>EXPEDIENTES<br>2020</p></button>
         <?php
         }
         ?>
@@ -52,7 +55,7 @@ include('../estructura/navegacion.php');
         <?php
         if($trabajarConExpedientes2021 == "0"){
         ?>
-          <button class="btn boton" id="boton" type="submit">EXPEDIENTES<br>2021</button>
+          <button class="btn-boton" id="boton" type="submit"><img src="../util/imagenes/iconos/expedienteBlanco.png" class="iconos"><p>EXPEDIENTES<br>2021</p></button>
         <?php
         }
         ?>
@@ -60,7 +63,7 @@ include('../estructura/navegacion.php');
         <?php
         if($trabajarOcultos == "0"){
         ?>
-          <button class="btn boton" id="boton" type="submit">OCULTOS</button>
+          <button class="btn-boton" id="boton" type="submit"><img src="../util/imagenes/iconos/ocultoBlanco.png" class="iconos"><p>OCULTOS</p></button>
         <?php
         }
         ?>

@@ -7,12 +7,11 @@ include('../estructura/navegacion.php');
 
 <body>
   <div class="container-fluid">
-  <span class="subtituloMenu">BANDEJAS</span>
     <?php
     include('bandejas.php');
     ?>
     <div>
-      <span id="subtituloBandejas">EXPEDIENTES ENVIADOS </span>
+      <h1 class="titulo">EXPEDIENTES ENVIADOS </h1>
       <img id="imagenRecargar" title="comentario" src="../util/imagenes/recargar.png" width="35" height="35" onclick="recargar();">
       
       <table class="table table-bordered">
@@ -127,90 +126,3 @@ include('../estructura/navegacion.php');
   });
 </script>
 
-
-<style type="text/css">
-#botonGeneral{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 13px;
-  width: 135px;
-}
-
-#botonGeneral:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#verExpediente, #botonAgregar, #botonEnviar, #botonArchivar{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-  width: 115px;
-}
-#verExpediente:hover, #botonAgregar:hover, #botonEnviar:hover, #botonArchivar:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#filaC{
-  border-color:white;
-  background-color: #148F77;
-  color: white;
-
-}
-#detalleC{
-  border-color: #148F77;
-}
-
-#botonAcciones{
-  background-color:#3A73A8;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAcciones:hover{
-  color: #3A73A8;
-  border-color: #3A73A8;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-
-#botonAccionEliminar{
-  background-color:red;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAccionEliminar:hover{
-  color: red;
-  border-color: red;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-</style>

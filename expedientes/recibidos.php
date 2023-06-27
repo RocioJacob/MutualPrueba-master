@@ -5,13 +5,14 @@ include('../estructura/navegacion.php');
 <html lang="es">
 <body>
   <div class="container-fluid">
-  <span class="subtituloMenu">BANDEJAS</span>
   <?php
     include('bandejas.php');
   ?>
     
     <div>
-      <span id="subtituloBandejas">EXPEDIENTES RECIBIDOS </span>
+     
+      <h1 class="titulo">EXPEDIENTES RECIBIDOS </h1>
+    
       <img id="imagenRecargar" title="comentario" src="../util/imagenes/recargar.png" width="35" height="35" onclick="recargar();">
  
 
@@ -89,9 +90,9 @@ include('../estructura/navegacion.php');
                   devolverComentarios($idExpediente, $anio); 
                 } 
               ?>
-              <a href="expedientePdf.php?idExpediente=<?php echo $idExpediente;?>&anio=<?php echo $anio;?>" class="btn" id="verExpediente" title="Ver expediente" target="_blank">Carátula</a>
+              <a href="expedientePdf.php?idExpediente=<?php echo $idExpediente;?>&anio=<?php echo $anio;?>" class="" id="verExpediente" title="Ver expediente" target="_blank"><button class="btnDetalles" id="verExpediente"  type="submit" title="Ver caratula">Carátula</button></a>
 
-              <button onclick="tomarExpediente('<?php echo $row['id_expediente']?>', '<?php echo $row['anio']?>', '<?php echo $row['id_inicio'] ?>', '<?php echo $row['id_fin'] ?>')" class="btn" id="botonTomar">Tomar</button>
+              <button onclick="tomarExpediente('<?php echo $row['id_expediente']?>', '<?php echo $row['anio']?>', '<?php echo $row['id_inicio'] ?>', '<?php echo $row['id_fin'] ?>')" class="btnDetalles" id="botonTomar">Tomar</button>
              </td>
            </tr>  
 
@@ -131,9 +132,9 @@ include('../estructura/navegacion.php');
         width:'500px',
         showCancelButton: true,
         confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#148F77',
+        confirmButtonColor: '#0F4C75',
         confirmButtonText: 'Aceptar',
-        cancelButtonColor: 'red',
+        cancelButtonColor: '#1B262C',
         allowOutsideClick: false,
     }).then((result) => {
           
@@ -182,50 +183,3 @@ function mensajeExito($mensaje, $idExpediente){
   }).then(function(){window.location.replace("tomados.php");});
 }
 </script>
-
-<style type="text/css">
-  #botonAcciones{
-  background-color:#3A73A8;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  border-color:white;
-  margin: 1px;
-  font-family: 'Arial';
-  font-size: 13px;
-  height: 30px;
-  width: 70px;
-}
-
-#botonAcciones:hover{
-  color: #3A73A8;
-  border-color: #3A73A8;
-  background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-
-#verExpediente, #botonGeneral, #botonTomar{
-  margin-right: 3px;
-  margin-left: 3px;
-  background-color: #148F77;
-  color: white;
-  border: 2px solid;
-  border-radius: 10px;
-  font-size: 14px;
-  width: 115px;
-}
-#verExpediente:hover, #botonGeneral:hover, #botonTomar:hover{
-   color: #148F77;
-   background-color: white;
-  -webkit-transform:scale(1);transform:scale(1); /*Acercamiento*/
-}
-#filaC{
-  border-color:white;
-  background-color: #148F77;
-  color: white;
-
-}
-#detalleC{
-  border-color: #148F77;
-}
-</style>

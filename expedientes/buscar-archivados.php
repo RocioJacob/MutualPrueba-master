@@ -103,13 +103,13 @@ $sql = mysqli_query($conexion, "SELECT COUNT(*) as totalExpedientes FROM expedie
 #botonAccionArchivado{
   float:center;
   margin-right: 5px;
-  background-color: #148F77;
+  background-color: #0F4C75;
   color: white;
   border: 2px solid;
   border-radius: 10px;
 }
 #botonAccionArchivado:hover{
-   color: #148F77;
+   color: #0F4C75;
    background-color:white;
   -webkit-transform:scale(1.1);transform:scale(1.1); /*Acercamiento*/
 }

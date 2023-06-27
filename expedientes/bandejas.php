@@ -17,11 +17,17 @@
 
 <!-- Para computadora -->
   <!--div class="d-none d-sm-none d-md-block"-->
-    <br><br>
+
     <div class="container text-center h-100 d-flex justify-content-center align-items-center">
-      <a href="recibidos.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">RECIBIDOS <span class="tituloBandeja"><?php echo "(".$recibidos.")";?></span></a>
-      
-      <a href="tomados.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">TOMADOS <span class="tituloBandeja"><?php echo "(".$tomados.")";?></span></a>
-      
-      <a href="enviados.php" class="botonBandeja" title="Ver historial" style="text-decoration: none;">ENVIADOS <span class="tituloBandeja"><?php echo "(".$enviados.")";?></span></a>
-    </div><br><br>
+      <a href="recibidos.php" class="botonBandejas" title="Ver historial"><img src="../util/imagenes/iconos/bandejaRecibidosB.png" class="iconosBandeja">RECIBIDOS  
+        <span class="tituloBandeja"><?php echo "(".$recibidos.")";?></span>
+      </a>
+
+      <a href="tomados.php" class="botonBandejas" title="Ver historial"><img src="../util/imagenes/iconos/tomarExpedienteB.png" class="iconosBandeja">TOMADOS
+        <span class="tituloBandeja"><?php echo "(".$tomados.")";?></span>
+      </a>
+
+      <a href="enviados.php" class="botonBandejas" title="Ver historial"><img src="../util/imagenes/iconos/bandejaEnviadosB.png" class="iconosBandeja">ENVIADOS  
+        <span class="tituloBandeja"><?php echo "(".$enviados.")";?></span>
+      </a>
+    </div>

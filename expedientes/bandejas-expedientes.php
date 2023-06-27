@@ -6,7 +6,9 @@ include('../estructura/navegacion.php');
 <html lang="es">
 <body>
 <div class="container" id="mycontainer">
-  <span class="subtituloMenu">BANDEJAS</span><br><br>
+  <hr>
+  <h1 class="titulo">BANDEJAS</h1>
+  <hr>
 
 <!-- Para computadora -->
   <!--div class="d-none d-sm-none d-md-block"-->
@@ -26,15 +28,15 @@ include('../estructura/navegacion.php');
     ?>
     
     <div class="container text-center h-100 d-flex justify-content-center align-items-center">
-      <a href="recibidos.php" class="btn boton" title="Ver historial">RECIBIDOS 
+      <a href="recibidos.php" class="botonBandejas" title="Ver historial"><img src="../util/imagenes/iconos/bandejaRecibidosB.png" class="iconosBandeja">RECIBIDOS  
         <span class="tituloBandeja"><?php echo "(".$recibidos.")";?></span>
       </a>
 
-      <a href="tomados.php" class="btn boton" title="Ver historial">TOMADOS 
+      <a href="tomados.php" class="botonBandejas" title="Ver historial"><img src="../util/imagenes/iconos/tomarExpedienteB.png" class="iconosBandeja">TOMADOS
         <span class="tituloBandeja"><?php echo "(".$tomados.")";?></span>
       </a>
 
-      <a href="enviados.php" class="btn boton" title="Ver historial">ENVIADOS 
+      <a href="enviados.php" class="botonBandejas" title="Ver historial"><img src="../util/imagenes/iconos/bandejaEnviadosB.png" class="iconosBandeja">ENVIADOS  
         <span class="tituloBandeja"><?php echo "(".$enviados.")";?></span>
       </a>
     </div><br/><br/>
@@ -53,31 +55,3 @@ function actualizar(){
 setInterval("actualizar()",10000);
 </script>
 
-
-<style type="text/css">
-  .boton{
-  border: 2px solid;
-  border-color: #0072BC;
-  transition: all 1s ease;
-  /*position: relative;*/
-  position: relative;
-  padding: 25px 1px; /*arriba-abajo, izq-der*/
-  margin: 0px 20px 10px 0px;
-  float: left;
-  border-radius: 15px; /*redondeo de las esquinas*/
-  /*font-family: 'Georgia', cursive;*/
-  font-family: 'Arial';
-  font-size: 15px; /*tamaño letra*/
-  color: white; /*color letra*/
-  /*text-decoration: none;  */
-  width: 170px !important; /*tamaño botones*/
-  height: 80px !important;
-  text-align: center; /*alineacion de texto*/
-  background: #0072BC;
-}
-
-.tituloBandeja{
-  font-size: 18px;
-  font-family: Arial;
-}
-</style>
