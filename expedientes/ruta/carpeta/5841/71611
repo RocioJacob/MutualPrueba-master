@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Solicitud>
+<TipoDocumento>1</TipoDocumento>
+<NumeroDocumento>23494451</NumeroDocumento>
+<Apellidos>FLORES</Apellidos>
+<Nombres>Pablo Humberto</Nombres>
+<Sexo>Mujer</Sexo>
+<FechaNacimiento>19731117</FechaNacimiento>
+<Direccion>
+<Calle>CALLE ALBERTO GENTILLINI 702 Bº 14 DE OCTUBRE </Calle>
+<Altura>CALLE ALBERTO GENTILLINI 702 Bº 14 DE OCTUBRE </Altura>
+<CodigoPostal>8300</CodigoPostal>
+<Localidad>NEUQUEN</Localidad>
+<Provincia>NEUQUEN</Provincia>
+<Pais>Argentina</Pais>
+</Direccion>
+<Telefono>2995231756</Telefono>
+<Mail></Mail>
+<Empleador></Empleador>
+<CUIT></CUIT>
+<OrdenPrestacion>
+<AccessionNumber></AccessionNumber>
+<Fecha>20230509</Fecha>
+<Hora>2240</Hora>
+<Profesional>LAB</Profesional>
+<Practicas>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>475</Prestacion>
+<Nombre>Hemograma.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>297</Prestacion>
+<Nombre>Eritrosedimentacion.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>902</Prestacion>
+<Nombre>Uremia.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>412</Prestacion>
+<Nombre>Glucemia.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>711</Prestacion>
+<Nombre>Orina Completa.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>1035</Prestacion>
+<Nombre>Colesterol HDL.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>1040</Prestacion>
+<Nombre>Colesterol LDL.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>174</Prestacion>
+<Nombre>Colesterol Total.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>876</Prestacion>
+<Nombre>Triglicéridos.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>904</Prestacion>
+<Nombre>Acido Úrico.</Nombre>
+</Practica>
+<Practica>
+<Subnomenclador>1</Subnomenclador>
+<Prestacion>100-2</Prestacion>
+<Nombre>Drogas: Kit x2 (cocaína - marihuana).</Nombre>
+</Practica>
+</Practicas>
+</OrdenPrestacion>
+<Profesional>
+<NombreCompleto>Zferg, Jorge Sddsds</NombreCompleto>
+<MatriculaProvincial>444</MatriculaProvincial>
+<MatriculaNacional>444</MatriculaNacional>
+</Profesional>
+</Solicitud>
+
+
+
+
+
+
+

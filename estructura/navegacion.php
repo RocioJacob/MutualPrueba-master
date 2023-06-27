@@ -12,13 +12,44 @@ else{
   $tipoUsuario = $_SESSION['tipo_usuario'];
   $idAreaUsuario = idAreaUsuario($documento);
 
-  $usuario1 = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE documento='$documento'");
+  $usuario1 = mysqli_query($conexion, "SELECT * FROM usuariosx WHERE documento='$documento' and habilitado='0'");
   $usuario1 = mysqli_fetch_assoc($usuario1);
-  $buscarExpedientes = $usuario1['buscar_expedientes'];
-  $generarExpediente = $usuario1['generar_expediente'];
-  $trabajarAnuales = $usuario1['trabajar_anuales'];
-  $buscarAnuales = $usuario1['buscar_anuales'];
-  $listadosExpedientes = $usuario1['listados_expedientes'];
+  $buscarExpedientes = $usuario1['permiso_buscar_expedientes']; //Si puede buscar expedientes
+  $generarExpediente = $usuario1['permiso_generar_expediente']; //Si puede generar expediente
+
+  $autorizarExpediente = $usuario1['permiso_autorizar_expediente'];
+  $marcarAnual = $usuario1['permiso_marcar_anual'];
+  $desmarcarAnual = $usuario1['permiso_desmarcar_anual'];
+  $trabajarConArchivados = $usuario1['permiso_trabajar_archivados'];
+  $trabajarConArchivadosOcultos = $usuario1['permiso_trabajar_archivados_ocultos'];
+  $trabajarConExpedientes2020 = $usuario1['permiso_trabajar_expedientes_2020'];
+  $trabajarConExpedientes2021 = $usuario1['permiso_trabajar_expedientes_2021'];
+  
+  
+  //Archivos
+  $eliminarArchivo = $usuario1['permiso_eliminar_archivo'];
+  $agregarArchivo = $usuario1['permiso_agregar_archivo'];
+  $verArchivo = $usuario1['permiso_ver_archivo'];
+
+
+  //Expedientes anuales
+  $trabajarAnuales = $usuario1['permiso_trabajar_anuales']; //permite marcar y desmarcar como anual
+
+
+  //Expedientes archivados
+  $trabajarConArchivados = $usuario1['permiso_trabajar_archivados'];
+  $archivarExpediente = $usuario1['permiso_archivar_expediente'];
+  $eliminarArchivoArchivado = $usuario1['permiso_eliminar_archivo_archivado'];
+  $desarchivarExpediente = $usuario1['permiso_desarchivar_expediente'];
+  $agregarArchivoArchivado = $usuario1['permiso_agregar_archivo_archivado'];
+  $verArchivoArchivado = $usuario1['permiso_ver_archivo_archivado'];
+
+  //Expedientes ocultos
+  $ocultarExpediente = $usuario1['permiso_ocultar_expediente'];
+  $desocultarExpediente = $usuario1['permiso_desocultar_expediente'];
+  $archivarOculto = $usuario1['permiso_archivar_oculto'];
+  $desarchivarOculto = $usuario1['permiso_desarchivar_oculto'];
+  $trabajarOcultos = $usuario1['permiso_trabajar_ocultos'];
 }
 ?>
 
@@ -37,7 +68,7 @@ else{
     <script src="../util/js/sweetalert2.min.js"></script>
     <link rel="stylesheet" href="../util/css/sweetalert2.min.css">
     <script src="../util/js/sweetalert2@10.js"></script>
-    <link rel="stylesheet" href="../util/css/estilo.css?v60" type="text/css">
+    <link rel="stylesheet" href="../util/css/estilo.css?v7" type="text/css">
     <link rel="stylesheet" type="text/css" href="../util/css/dataTables.bootstrap5.min.css">
     <script type="text/javascript" src="../util/js/jquery.dataTables.min.js"></script>
   <script type="text/javascript" src="../util/js/dataTables.bootstrap5.min.js"></script> 
@@ -59,16 +90,29 @@ else{
         <a class="nav-link" href="../principal/menu-principal.php">Inicio</a>
       </li>
 
-      <li class="nav-item" style="margin-right: 20px;">
-        <a class="nav-link" href="../expedientes/index.php" role="button">Expedientes</a>
-      </li>
-
       <li class="nav-item dropdown" style="margin-right: 20px;">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Afiliados</a>
         <ul class="dropdown-menu" style="margin-top: 8px;">
+        <?php
+        if(estaconectadoAfiliacion()){
+        ?>
+          <!--li><a class="dropdown-item" href="http://10.8.1.1" target="_blank">Afiliaciones</a></li-->
+          <li><a class="dropdown-item" href="http://192.168.0.5" target="_blank">Afiliaciones</a></li>
+        <?php
+        }
+        else{
+        ?>
+          <li><a class="dropdown-item" href="../principal/menu-principal.php">Afiliaciones</a></li>
+        <?php
+        }
+        ?>
           <li><a class="dropdown-item" href="">Búsqueda</a></li>
           <li><a class="dropdown-item" href="">Registrados</a></li>
         </ul>
+      </li>
+
+      <li class="nav-item" style="margin-right: 20px;">
+        <a class="nav-link" href="../expedientes/index.php" role="button">Expedientes</a>
       </li>
 
       <li class="nav-item" style="margin-right: 20px;">
@@ -109,8 +153,8 @@ else{
 $('#salir').click(function(evento){
   evento.preventDefault();
   Swal.fire({
-    title: '¿Desea cerrar su sesión?',
-    width:'550px',
+    title: '<span style="font-size: 22px;">¿Desea cerrar su sesion?</span>',
+    width:'500px',
     showCancelButton: true,
     confirmButtonText: 'Aceptar',
     confirmButtonColor: '#148F77',
@@ -128,17 +172,17 @@ $('#salir').click(function(evento){
           //$("#loader").css('display','block');
         },
         success: function(data){
-        console.log(data);
+        //console.log(data);
         //$("#loader").css('display','none');
           var jsonData = JSON.parse(data);
           if(jsonData.salida == 0){
             //localStorage.removeItem("sesion");
             //sessionStorage.setItem("sesion", "1");
             //console.log("salida: "+localStorage.getItem("sesion"));
-            return mensajeExito(jsonData.mensaje1, jsonData.mensaje2);
+            return mensajeExitoSesion(jsonData.mensaje);
           }
           else{
-            return mensajeError(jsonData.mensaje1, jsonData.mensaje2);
+            return mensajeErrorSesion(jsonData.mensaje);
           }
         }
        });
@@ -147,24 +191,24 @@ $('#salir').click(function(evento){
 });
 });
 
-function mensajeError($mensaje1, $mensaje2){
+function mensajeErrorSesion($mensaje){
   swal.fire({
     icon: 'error',
-    title: $mensaje1,
-    text: $mensaje2,
+    title: "Error",
+    text: $mensaje,
     icon: 'error',
-    width:'550px',
+    width:'500px',
     allowOutsideClick: false,
     confirmButtonColor: '#03989e',
   });
 }
 
-function mensajeExito($mensaje1, $mensaje2){
+function mensajeExitoSesion($mensaje){
   Swal.fire({
     icon: 'success',
-    title: $mensaje1, 
-    text: $mensaje2,
-    width:'550px',
+    title: "Exito", 
+    text: $mensaje,
+    width:'500px',
     allowOutsideClick: false,
     }).then(function(){
       //window.open('../index.php');

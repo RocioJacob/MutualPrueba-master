@@ -225,9 +225,9 @@ function devolverComentarios($id){
     ?>
       <table class="table table-bordered">
         <tr>
-          <td id="filaComentario">N°</td>
-          <td id="filaComentario">Usuario</td>
-          <td id="filaComentario">Comentario</td>
+          <td>N°</td>
+          <td>Usuario</td>
+          <td>Comentario</td>
           <?php 
             $i=0;
             $j=1;
@@ -235,9 +235,9 @@ function devolverComentarios($id){
               if($fila['comentario']!=""){
           ?>
                 <tr>
-                  <td id="detalleComentario"> <?php echo $j; ?></td>
-                  <td id="detalleComentario"> <?php echo $fila['usuario']; ?></td>
-                  <td id="detalleComentario"> <?php echo $fila['comentario']; ?></td>
+                  <td> <?php echo $j; ?></td>
+                  <td> <?php echo $fila['usuario']; ?></td>
+                  <td> <?php echo $fila['comentario']; ?></td>
                 </tr>
                 <?php
                 $j=$j+1;
