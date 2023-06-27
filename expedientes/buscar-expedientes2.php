@@ -5,7 +5,7 @@ $tabla = "";
 
 if(isset($_POST["valorBusqueda"])){
    $entrada = $_POST["valorBusqueda"];
-   $query = "SELECT * FROM expedientes WHERE identificador LIKE '".$entrada."%' OR (tipo LIKE '%".$entrada."%' OR nombre_tramite LIKE '".$entrada."%' OR anio LIKE '%".$entrada."%' OR documento LIKE '%".$entrada."%' OR cuit LIKE '%".$entrada."%' OR codigo LIKE '%".$entrada."%' OR afiliado LIKE '".$entrada."%' OR proveedor LIKE '".$entrada."%') ORDER BY id DESC";
+   $query = "SELECT * FROM expedientes WHERE identificador LIKE '".$entrada."%' AND (oculto LIKE '1') AND (archivado LIKE '1') OR (tipo LIKE '%".$entrada."%' OR nombre_tramite LIKE '".$entrada."%' OR anio LIKE '%".$entrada."%' OR documento LIKE '%".$entrada."%' OR cuit LIKE '%".$entrada."%' OR codigo LIKE '%".$entrada."%' OR afiliado LIKE '".$entrada."%' OR proveedor LIKE '".$entrada."%') ORDER BY id DESC";
 
 	//$conexion->query: Realiza una consulta a la base de datos
 	$result=$conexion->query($query);

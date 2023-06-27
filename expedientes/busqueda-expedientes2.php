@@ -6,9 +6,10 @@ include('../estructura/navegacion.php');
 <html lang="es">
 <body>
 
-  <div class="container" id="mycontainer">
+  <div class="container-fluid">
     <form id="formularioBusqueda">
       <span class="subtituloMenu">BÚSQUEDA DE EXPEDIENTE</span><br>
+      <span style="color: red; font-size: 15px;">No archivados y no ocultos</span><br><br>
       <input type="text" name="busqueda" id="busqueda" placeholder=" Ingrese id del expediente o numero de documento o cuit o tipo o trámite" maxlength="15" autocomplete="off">
       <input type="submit" id="botonBuscar" value="Buscar">
       <input type="submit" id="botonLimpiar" value="Limpiar">
@@ -60,7 +61,7 @@ function validarFormulario(){
 
 function mensajeError($mensaje){
   swal.fire({
-    title: "ERROR",
+    title: "Atención",
     text: $mensaje,
     icon: 'error',
     width:'550px',

@@ -3,10 +3,22 @@ include('../estructura/navegacion.php');
 ?>
 
 <body>
-<div class="container" id="mycontainer">
-  <span class="subtituloMenu">GENERAR EXPEDIENTE</span><br><br>
+<div class="container-fluid">
+  <span class="subtituloMenu">GENERAR EXPEDIENTE</span><br>
+  <?php 
+    if(estaConectado()){
+  ?>
+    <span style="color: red;">Con conexión a la VPN</span>
+  <?php
+    }else{
+  ?>
+    <span style="color: red;">Sin conexión a la VPN</span>
+  <?php    
+    }
+  ?>
 
-  <form method="POST" id="formulario" enctype="multipart/form-data">
+  <br><br>
+    <form method="POST" id="formulario" enctype="multipart/form-data">
     <div class="form-row">
 
       <div class="form-group col-md-4">
@@ -145,47 +157,38 @@ include('../estructura/navegacion.php');
 
 
 <script type="text/javascript">
-/*Al seleccionar el tipo de expediente, verifica que mostrar**/
-/*Si se selecciona Afiliado, Delagación, Empleado y Otros se nuestra Documento*/
+/*Al seleccionar el tipo de expediente, verifica que mostrar*/
+/*Si se selecciona Afiliado, Delagación, Empleado, Otros o Turismo se nuestra Documento*/
 /*Si selecciona Proveedor se muestra Proveedor*/
+
 $(document).on('change', '#tipo', function() {
-  var $mensajeUno = $(
-    '<div><label style="color:#0072BC"> Documento (sin puntos)</label><input type="text" id="documento" name="documento" class="form-control" style=" border-color: #0072BC; border-radius: 5px;" autocomplete="off" maxlength="8"></div>');
-  var $mensajeDos = $(
-    '<div><label style="color:#0072BC">* Cuit (sin puntos ni guiones)</label><input type="text" id="cuit" name="cuit" class="form-control" style=" border-color: #0072BC; border-radius: 5px;" autocomplete="off" maxlength="11"></div>');
+  var TIPO_AFILIADO = 'AFILIADO';
+  var TIPO_DELEGACION = 'DELEGACION';
+  var TIPO_EMPLEADO = 'EMPLEADO';
+  var TIPO_PROVEEDOR = 'PROVEEDOR';
+  var TIPO_OTROS = 'OTROS';
 
-  /*var $mensajeTres = $(
-    '<div><label style="color:#0072BC"> Código Tango (sin puntos)</label><input type="text" id="codigo" name="codigo" class="form-control" style=" border-color: #0072BC; border-radius: 5px;" autocomplete="off" maxlength="6"></div>');
-  var $mensajeCuatro = $(
-    '<div><label style="color:#0072BC">Monto (solo punto decimal)</label><input type="number" id="monto" name="monto" class="form-control" style=" border-color: #0072BC; border-radius: 5px;" autocomplete="off" maxlength="8"></div>');*/
-  
-
+  var $mensajeUno = $('<div><label style="color:#0072BC"> Documento (sin puntos)</label><input type="text" id="documento" name="documento" class="form-control" style=" border-color: #0072BC; border-radius: 5px;" autocomplete="off" maxlength="8"></div>');
+  var $mensajeDos = $('<div><label style="color:#0072BC">* Cuit (sin puntos ni guiones)</label><input type="text" id="cuit" name="cuit" class="form-control" style=" border-color: #0072BC; border-radius: 5px;" autocomplete="off" maxlength="11"></div>');
   var seleccion = $(this).val();
-  $('#mensaje').html('');
+
+  function generarHTML(inputHTML) {
+    $('#datos').html('');
+    $('#mensaje').html(inputHTML);
+  }
+
   switch (seleccion) {
-    case 'AFILIADO':
-      $('#datos').html('');
-      $('#mensaje').append($mensajeUno);
+    case TIPO_AFILIADO:
+    case TIPO_DELEGACION:
+    case TIPO_EMPLEADO:
+    case TIPO_OTROS:
+      generarHTML($mensajeUno);
       break;
-    case 'DELEGACION':
-      $('#datos').html('');
-      $('#mensaje').append($mensajeUno);
-      break;
-    case 'EMPLEADO':
-      $('#datos').html('');
-      $('#mensaje').append($mensajeUno);
-      break;
-    case 'PROVEEDOR':
-      $('#datos').html('');
-      $('#mensaje').append($mensajeDos);
-      break;
-    case 'OTROS':
-      $('#datos').html('');
-      $('#mensaje').append($mensajeUno);
+    case TIPO_PROVEEDOR:
+      generarHTML($mensajeDos);
       break;
   }
 });
-
 
 /* Al seleccionar expediente tipo DELEGACION debe mostrar select con todas las delegaciones */
 $(document).on('change', '#tipo', function() {
@@ -205,7 +208,8 @@ $(document).on('change', '#tipo', function() {
   }
 });
 
-/*Al seleccionar el tipo de TRAMITE **/
+
+/*Al seleccionar el tipo de TRAMITE*/
 $(document).on('change', '#tramite', function() {
 
   var seleccion = $(this).val();
@@ -260,6 +264,7 @@ $(document).on('change', '#tramite', function() {
   }
 });
 
+
 //Obtengo el codigo del tramite
 function obtener_datostramite(usuario){
   $.ajax({
@@ -273,15 +278,14 @@ function obtener_datostramite(usuario){
   });
 }
 
-//********************************************************
-//Cuando se completa campo documento se ejecuta es funcion
+
+//Cuando se completa campo documento se ejecuta
 $(document).on('change', '#documento', function() {
   var documento = $(this).val();
   if (documento!=""){
     obtener_datos(documento);
   }
 });
-
 
 function obtener_datos(usuario){
   $.ajax({
@@ -294,15 +298,14 @@ function obtener_datos(usuario){
     $("#datos").html(resultado);
   });
 }
-//*********************************************************
 
 $('#botonGenerar').click(function(evento){
   evento.preventDefault();
     if(validarFormulario()){
       var datos = new FormData($('#formulario')[0]);
       Swal.fire({
-          title: '¿Desea generar el Expediente?',
-          width:'550px',
+          title: '<span style="font-size: 22px;">¿Desea generar el Expediente?</span>',
+          width:'500px',
           showCancelButton: true,
           confirmButtonText: 'Aceptar',
           confirmButtonColor: '#148F77',
@@ -332,8 +335,8 @@ $('#botonGenerar').click(function(evento){
               else{
                 return mensajeErrorExpediente(jsonData.mensaje);
               }
-            }
-
+            },
+            
           });
             return false;
         }
@@ -344,10 +347,10 @@ $('#botonGenerar').click(function(evento){
 
 function mensajeErrorExpediente($mensaje){
   swal.fire({
-    title: "ERROR",
-    text: $mensaje,
     icon: 'error',
-    width:'550px',
+    title: "Error",
+    text: $mensaje,
+    width:'500px',
     allowOutsideClick: false,
     confirmButtonColor: '#03989e',
   });
@@ -356,8 +359,9 @@ function mensajeErrorExpediente($mensaje){
 function mensajeExitoExpediente($mensaje){
   Swal.fire({
     icon: 'success',
-    width:'550px',
-    title: $mensaje, 
+    width:'500px',
+    title: "Éxito",
+    text: $mensaje, 
     allowOutsideClick: false,
     }).then(function(){
       //window.open("../principal/menu-principal.php");
@@ -378,6 +382,12 @@ function validarFormulario(){
         return mensajeErrorExpediente("Debe ingresar DOCUMENTO");
         $("#documento").focus();
         return false;
+      }else{
+        if(!Number.isInteger($("#documento").val())){
+          return mensajeErrorExpediente("DOCUMENTO debe ser númerico");
+          $("#documento").focus();
+          return false;
+        }
       }
     }
 
@@ -393,6 +403,12 @@ function validarFormulario(){
         return mensajeErrorExpediente("Debe ingresar CUIT");
         $("#cuit").focus();
         return false;
+      }else{
+          if(!Number.isInteger($("#cuit").val())){
+            return mensajeErrorExpediente("CUIT debe ser númerico sin guiones");
+            $("#cuit").focus();
+            return false;
+          }
       }
     }
 
@@ -482,7 +498,6 @@ function validarFormulario(){
   }
   return true;
 }
-
 </script>
 
 
